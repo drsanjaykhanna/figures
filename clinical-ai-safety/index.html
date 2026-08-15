@@ -60,7 +60,7 @@ svg{width:100%;height:auto;max-height:66vh}
   </div>
   <div class="tiles">
     <div class="tile" onclick="go('f1')"><h2>Figure 1</h2><p>Evidence by technology tier</p></div>
-    <div class="tile" onclick="go('f2')"><h2>Figure 2</h2><p>From 1,524 devices to 144 reports</p></div>
+    <div class="tile" onclick="go('f2')"><h2>Figure 2</h2><p>From 1,524 devices to 149 reports</p></div>
     <div class="tile" onclick="go('f3')"><h2>Figure 3</h2><p>Who bothers to look</p></div>
     <div class="tile" onclick="go('f4')"><h2>Figure 4</h2><p>What the record actually says</p></div>
     <div class="tile" onclick="go('f5')"><h2>Figure 5</h2><p>Approval against silence</p></div>
@@ -98,7 +98,7 @@ svg{width:100%;height:auto;max-height:66vh}
 <div class="wrap"><svg id="s2" viewBox="0 0 900 440"></svg>
 <p class="note">FDA AI-Enabled Medical Device List &times; openFDA MAUDE &times; openFDA 510(k) &middot; every step reproducible from the included code</p>
 <button class="btn" onclick="tog('p2')">Show explanation</button>
-<div class="panel" id="p2"><h3>How 1,524 devices become 144 usable reports</h3>
+<div class="panel" id="p2"><h3>How 1,524 devices become 149 usable reports</h3>
 <p>This figure exists because the obvious way to do this analysis is wrong, and getting it wrong produces a confident answer that is false. Each step is a decision, and each is stated here so it can be argued with.</p>
 
 <h4>Step 1. Start from the FDA's own list</h4>
@@ -123,7 +123,7 @@ svg{width:100%;height:auto;max-height:66vh}
 <p>Two codes scrape past the majority threshold on very small denominators: a knee implantation system (1 AI device of 2) and surgical blood loss estimation (3 of 6). Both are physical products, and between them they hold 529 filings. Removing them leaves <strong>218</strong>.</p>
 
 <h4>Step 7. Read them</h4>
-<p>Every remaining narrative was read individually rather than pattern-matched. 144 describe the software producing a wrong clinical answer. <strong>136 of those, 94%, come from one company.</strong> That is Figure 3.</p>
+<p>Every remaining narrative was read individually rather than pattern-matched. 149 describe the software producing a wrong clinical answer. <strong>136 of those, 91%, come from one company.</strong> That is Figure 3.</p>
 
 <div class="caveat"><p><strong>Where this is soft.</strong> The 50% majority threshold is a judgement, not a standard. The denominator counts 510(k) clearances and so misses devices authorised by other routes, which makes the proportion approximate and causes one code to compute above 100%. Removing the two physical-product codes is defensible but discretionary, and keeping them would change the headline. If this work goes further, those choices should be fixed in writing before anyone looks at the answer.</p></div></div></div></section>
 
@@ -141,7 +141,7 @@ svg{width:100%;height:auto;max-height:66vh}
 
 <h4>What it looks like when a clinician notices instead</h4>
 <div class="quote">"The case went for HeartFlow analysis and FFRCT came back clearly negative in the proximal RCA. I am told now that the patient developed unstable angina and underwent cath, showing &gt;90% stenosis in the proximal RCA."</div>
-<p>That is one report. There are seven of that kind. The other 132 are the company auditing itself.</p>
+<p>That is one report. There are seven of that kind. The other 129 are from the company's own quality process (118 self-identified, 11 flagged by both company review and a customer, 3 unclear).</p>
 
 <h4>Why this reframes everything</h4>
 <p>Remove HeartFlow and 687 other cleared AI devices have produced 79 reports between them. Not because those devices are better. Because nobody is checking.</p>
@@ -188,7 +188,7 @@ svg{width:100%;height:auto;max-height:66vh}
 <h4>What the shape shows</h4>
 <p><strong>49 of the 66 codes have never received a single report.</strong> Not one, in the entire history of the database.</p>
 <p>Two cases deserve stating on their own.</p>
-<p><strong>QIH</strong> is the main code for automated radiological image processing. <strong>274 AI devices</strong> sit on it. Between them they have produced <strong>10 reports</strong>, and 6 of those describe the same software defect at a single manufacturer.</p>
+<p><strong>QIH</strong> is the main code for automated radiological image processing. <strong>274 AI devices</strong> sit on it. Between them they have produced <strong>10 reports</strong>. Reading the narratives, 6 describe the same patient-record merge defect at one manufacturer, filed separately over eighteen months.</p>
 <p><strong>PIB</strong> is the code for autonomous diabetic retinopathy screening. This is AI that makes a diagnosis with no clinician reviewing it, first cleared in 2018 and the first of its kind ever authorised anywhere. Seven such devices are now marketed. In eight years the code has received <strong>one</strong> report, and it was filed by a bystander who watched the software miss glaucoma and report only that diabetic retinopathy was absent.</p>
 
 <h4>How to read this responsibly</h4>
@@ -298,9 +298,9 @@ const D = {
  funnel:[{l:'FDA AI-Enabled Device List',v:1524,c:'#3b82f6'},
          {l:'On codes where AI is the majority',v:688,c:'#3b82f6',n:'836 excluded as unfindable'},
          {l:'Adverse event filings',v:747,c:'#8b5cf6'},
-         {l:'Distinct defects, duplicates collapsed',v:479,c:'#8b5cf6'},
+         {l:'Distinct defects (duplicates collapsed)',v:'~479',c:'#8b5cf6'},
          {l:'Excluding physical products',v:218,c:'#f59e0b'},
-         {l:'Describe a wrong clinical answer',v:144,c:'#ef4444',n:'136 from one company'}],
+         {l:'Describe a wrong clinical answer',v:149,c:'#ef4444',n:'136 from one company'}],
  hf:{total:139,others:79,self:118,both:11,cust:7,unclear:3,fn:108,mal:127,inj:12},
  rec:[{q:'"During the course of this investigation, Cerner was also informed of a patient death. Cerner was not provided the details."',
        s:'Cerner sepsis alerting',f:'MALFUNCTION',w:'a death, in the text only'},
@@ -456,7 +456,7 @@ function f9(){var s=txt(60,34,'Four registries, and none of them records clinica
   if(i<3)s+='<line x1="60" y1="'+(y+rh-14)+'" x2="840" y2="'+(y+rh-14)+'" stroke="#1e293b"/>';});
  s+='<line x1="60" y1="392" x2="840" y2="392" stroke="#1e293b"/>';
  s+=txt(60,414,'The registries hold 1,438 health records between them, and almost none concern a regulated clinical AI device.',{s:11.5,f:'#f59e0b',w:600});
- s+=txt(60,434,'The FDA is the only source that does. It holds 218, and 94% of those describing a wrong answer come from one company.',{s:11,f:'#64748b'});
+ s+=txt(60,434,'The FDA is the only source that does. It holds 218, and 91% of those describing a wrong answer come from one company.',{s:11,f:'#64748b'});
  document.getElementById('s9').innerHTML=s;}
 
 function f7(){var s=txt(60,34,'Safety claims are inherited from older devices',{s:16,f:'#f8fafc',w:700});
