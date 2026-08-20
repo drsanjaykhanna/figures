@@ -3,667 +3,974 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARISE 2027 — Draft Figures for Review</title>
+<title>ARISE 2027: Draft Figures for Review</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --c-900:#0F1B1E; --c-800:#1E3A3F; --c-700:#3D5A60; --c-600:#5C7A80;
+  --c-500:#8BA0A5; --c-400:#A8BEC2; --c-300:#C8D8DB; --c-200:#E2EEEF;
+  --c-100:#F0F6F7; --c-50:#F7FAFA;
+  --blue:#2563EB; --red:#DC2626; --green:#059669; --amber:#D97706;
+  --purple:#7C3AED; --teal:#0D9488; --cyan:#0891B2; --indigo:#4F46E5;
+  --accent:#0D9488;
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0f172a;color:#f8fafc;min-height:100vh;overflow-x:hidden}
-section{display:none;min-height:100vh;padding:40px 32px;animation:fadeIn .35s ease-out}
-section.active{display:block}
-#landing.active{display:flex;flex-direction:column;align-items:center;justify-content:center}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-#landing h1{font-size:32px;font-weight:800;margin-bottom:4px;letter-spacing:-.6px;background:linear-gradient(135deg,#f8fafc,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-#landing .sub{color:#64748b;font-size:12px;margin-bottom:40px;letter-spacing:.3px}
-.group-label{color:#475569;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 10px;width:100%;max-width:820px;text-align:left}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;max-width:820px;width:100%;margin-bottom:28px}
-.tile{background:linear-gradient(145deg,#1e293b,#0f172a);border:1px solid #1e293b;border-radius:14px;padding:24px 16px;cursor:pointer;transition:all .2s ease;text-align:center;position:relative;overflow:hidden}
-.tile::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(34,197,94,.04));opacity:0;transition:opacity .2s}
-.tile:hover{border-color:#334155;transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
-.tile:hover::before{opacity:1}
-.tile h2{font-size:12px;font-weight:700;margin-bottom:4px;letter-spacing:-.2px;position:relative}
-.tile p{font-size:10px;color:#475569;position:relative;letter-spacing:.2px;line-height:1.5}
-.fig-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;max-width:940px;margin-left:auto;margin-right:auto}
-.back-link{color:#94a3b8;font-size:11px;cursor:pointer;padding:5px 10px;border:1px solid #334155;border-radius:6px;text-decoration:none;transition:all .15s;letter-spacing:.3px}
-.back-link:hover{color:#f8fafc;border-color:#475569}
-.fig-title{font-size:11px;font-weight:500;color:#64748b;letter-spacing:1.5px;text-transform:uppercase}
-.fig-label{display:inline-block;font-size:10px;font-weight:600;color:#94a3b8;letter-spacing:1.2px;text-transform:uppercase;padding:4px 10px;border:1px solid #334155;border-radius:20px;margin:0 auto 12px;text-align:center}
-.fig-container{display:flex;justify-content:center;align-items:flex-start;max-width:940px;margin:0 auto}
-.fig-container svg{width:100%;max-height:70vh;height:auto}
-.wrap{max-width:940px;margin:0 auto}
-svg{width:100%;height:auto;max-height:66vh}
-.explain-toggle,.btn{display:block;margin:24px auto 0;background:none;border:1px solid #334155;color:#64748b;padding:7px 20px;border-radius:20px;cursor:pointer;font-size:10px;font-family:Inter,sans-serif;letter-spacing:.8px;text-transform:uppercase;transition:all .15s}
-.explain-toggle:hover,.btn:hover{color:#94a3b8;border-color:#475569}
-.explain-panel,.panel{display:none;max-width:760px;margin:20px auto 0;background:linear-gradient(180deg,#1e293b,#0f172a);border:1px solid #1e293b;border-radius:14px;padding:28px 32px}
-.explain-panel.show,.panel.show{display:block;animation:fadeIn .25s ease-out}
-.explain-panel h2,.panel h3{font-size:14px;margin-bottom:14px;letter-spacing:-.2px}
-.explain-panel p,.panel p{font-size:11.5px;color:#94a3b8;line-height:1.75;margin-bottom:10px}
-.explain-panel strong,.panel strong{color:#e2e8f0}
-.panel h4{font-size:11.5px;color:#cbd5e1;margin:16px 0 7px}
-.panel em{color:#cbd5e1;font-style:normal}
-.note{color:#475569;font-size:10px;margin-top:14px;text-align:center;line-height:1.7}
-.caveat{border-top:1px solid #1e293b;margin-top:16px;padding-top:12px}
-.caveat p{font-size:11px;color:#64748b}
-.quote{padding:10px 14px;border-left:2px solid #475569;background:rgba(15,23,42,.5);border-radius:0 6px 6px 0;color:#cbd5e1;font-size:11px;line-height:1.7;margin:10px 0}
+
+body{
+  font-family:'Inter',-apple-system,system-ui,sans-serif;
+  background:#FAFBFC;color:var(--c-800);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"kern","liga","calt","lnum";
+}
+
+section{display:none;padding:48px 20px 64px;max-width:1200px;margin:0 auto}
+section.active{display:block;animation:fadeIn .2s ease}
+#landing.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:85vh;max-width:760px}
+#rp{max-width:1260px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* Landing */
+#landing h1{font-size:36px;font-weight:800;color:var(--c-900);letter-spacing:-.5px;margin-bottom:4px}
+#landing .subtitle{color:var(--c-500);font-size:15px;margin-bottom:48px;font-weight:400}
+.group{width:100%;margin-bottom:32px}
+.group-label{color:var(--accent);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--c-200)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.card{display:block;background:#fff;border:1px solid var(--c-200);border-radius:12px;padding:16px 18px;cursor:pointer;transition:all .15s;text-decoration:none}
+.card:hover{border-color:var(--c-400);box-shadow:0 2px 12px rgba(0,0,0,.06);transform:translateY(-1px)}
+.card-title{font-size:15px;font-weight:700;color:var(--c-900);margin-bottom:4px}
+.card-desc{font-size:12px;color:var(--c-600);line-height:1.5}
+
+/* Figure header */
+.fig-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.back-btn{color:var(--c-500);font-size:12px;cursor:pointer;padding:5px 12px;border:1px solid var(--c-300);border-radius:6px;text-decoration:none;background:#fff;font-weight:500;transition:all .12s;font-family:inherit}
+.back-btn:hover{color:var(--c-800);border-color:var(--c-400);background:var(--c-50)}
+.fig-label{font-size:11px;font-weight:600;color:var(--c-500);letter-spacing:1.5px;text-transform:uppercase}
+
+/* Chart containers */
+.chart-wrap{background:#fff;border:1px solid var(--c-200);border-radius:12px;padding:4px;box-shadow:0 1px 3px rgba(0,0,0,.03);margin-bottom:8px}
+.chart-wrap svg{width:100%;height:auto;display:block}
+.source-note{color:var(--c-500);font-size:11px;margin-top:10px;text-align:center;line-height:1.6}
+
+/* Explain panels */
+.explain-btn{display:block;margin:20px auto 0;background:#fff;border:1px solid var(--c-300);color:var(--c-600);padding:7px 20px;border-radius:8px;cursor:pointer;font-size:12px;font-family:inherit;font-weight:600;letter-spacing:.3px;transition:all .12s}
+.explain-btn:hover{color:var(--c-800);border-color:var(--c-400);background:var(--c-50)}
+.explain-panel{display:none;max-width:700px;margin:16px auto 0;border:1px solid var(--c-200);border-radius:12px;padding:24px 28px;background:#fff}
+.explain-panel.show{display:block;animation:fadeIn .15s}
+.explain-panel h2{font-size:17px;color:var(--c-900);margin-bottom:12px;font-weight:700}
+.explain-panel h4{font-size:13px;color:var(--c-700);margin:16px 0 6px;font-weight:600}
+.explain-panel p{font-size:14px;color:var(--c-700);line-height:1.7;margin-bottom:8px}
+.explain-panel strong{color:var(--c-900);font-weight:600}
+.caveat{border-top:1px solid var(--c-200);margin-top:16px;padding-top:12px}
+.caveat p{font-size:13px;color:var(--c-500);line-height:1.6}
+.quote{padding:8px 14px;border-left:3px solid var(--accent);background:var(--c-50);border-radius:0 8px 8px 0;color:var(--c-700);font-size:13px;line-height:1.6;margin:8px 0}
+
+/* Figure 1 layout */
+.f1-layout{display:flex;gap:24px;max-width:1160px;margin:0 auto;align-items:stretch}
+.f1-main{flex:3}
+.f1-side{flex:2;display:flex;flex-direction:column}
+.f1-panel-label{font-size:11px;font-weight:700;color:var(--c-500);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.pending-box{flex:1;display:flex;align-items:center;justify-content:center;border:2px dashed var(--c-300);border-radius:12px;background:var(--c-50)}
+.pending-inner{text-align:center;padding:24px}
+.pending-title{font-size:16px;font-weight:600;color:var(--c-400);margin-bottom:8px}
+.pending-desc{font-size:12px;color:var(--c-500);max-width:220px;line-height:1.5}
+
+/* Figure 4 wheel */
+.wheel-layout{display:flex;align-items:center;gap:0;max-width:1160px;width:100%}
+.wheel-col{width:220px;flex-shrink:0}
+.wheel-col-left{text-align:right;padding-right:16px}
+.wheel-col-right{padding-left:16px}
+.wheel-center{flex:1;display:flex;justify-content:center}
+.wheel-quad{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin:18px 0 6px}
+.wheel-item{font-size:12px;color:var(--c-700);padding:4px 0;display:flex;align-items:center;gap:7px}
+.wheel-item-left{justify-content:flex-end}
+.wheel-item span.dots{font-size:10px;letter-spacing:1px}
+.wheel-item span.lbl{font-weight:500}
+.wheel-legend{display:flex;justify-content:center;gap:16px;margin-top:24px;flex-wrap:wrap}
+.wheel-legend-item{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--c-500)}
+.wheel-legend-swatch{width:12px;height:12px;border-radius:3px}
+
+/* Tooltip */
+.tooltip{display:none;position:fixed;background:#fff;border:1px solid var(--c-200);border-radius:8px;padding:8px 14px;box-shadow:0 4px 20px rgba(0,0,0,.1);font-size:13px;color:var(--c-800);pointer-events:none;z-index:1000;max-width:320px;font-family:'Inter',sans-serif}
+.tooltip.show{display:block}
+
+/* Responsive */
+@media(max-width:768px){
+  section{padding:24px 16px 48px}
+  #landing h1{font-size:28px}
+  .cards{grid-template-columns:1fr}
+  .f1-layout{flex-direction:column}
+  .wheel-layout{flex-direction:column;gap:20px}
+  .wheel-col{width:100%;text-align:left!important;padding:0!important}
+  .wheel-item-left{justify-content:flex-start}
+}
 </style>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 </head>
 <body>
 
 <section id="landing" class="active">
   <h1>ARISE 2027</h1>
-  <p class="sub">Draft Figures for Review &middot; August 2026</p>
-  <p class="group-label">Clinical AI Readiness</p>
-  <div class="tiles">
-    <div class="tile" onclick="nav('f1')"><h2>Figure 1</h2><p>AI vs Human Performance</p></div>
-    <div class="tile" onclick="nav('f2a')"><h2>Figure 2a</h2><p>Divergence — Large Models</p></div>
-    <div class="tile" onclick="nav('f2b')"><h2>Figure 2b</h2><p>Divergence — Med & Small</p></div>
-    <div class="tile" onclick="nav('f4')"><h2>Figure 4</h2><p>Clinical AI Readiness</p></div>
+  <p class="subtitle">Draft Figures for Review</p>
+  <div class="group">
+    <div class="group-label">How safe is clinical AI?</div>
+    <div class="cards">
+      <div class="card" onclick="nav('f2')"><div class="card-title">The Divergence</div><p class="card-desc">Capability vs clinical vs safety. 40 models</p></div>
+      <div class="card" onclick="nav('f2s')"><div class="card-title">The Detection Gap</div><p class="card-desc">Benchmark harm vs surveillance reality</p></div>
+      <div class="card" onclick="nav('s5')"><div class="card-title">Cleared but Unmonitored</div><p class="card-desc">333 devices authorised. 49 codes: zero reports.</p></div>
+    </div>
   </div>
-  <p class="group-label">Clinical AI Safety</p>
-  <div class="tiles">
-    <div class="tile" onclick="nav('s5')"><h2>Figure 5</h2><p>Approval against silence</p></div>
-    <div class="tile" onclick="nav('s6')"><h2>Figure 6</h2><p>Trials run, results reported</p></div>
-    <div class="tile" onclick="nav('s7')"><h2>Figure 7</h2><p>Research against safety research</p></div>
+  <div class="group">
+    <div class="group-label">How ready is clinical AI?</div>
+    <div class="cards">
+      <div class="card" onclick="nav('f1')"><div class="card-title">AI vs Human</div><p class="card-desc">7 RCTs. AI alone outperforms the team</p></div>
+      <div class="card" onclick="nav('f4')"><div class="card-title">Readiness Wheel</div><p class="card-desc">16 applications, 0 to 5. Amber = deployed without regulation.</p></div>
+      <div class="card" onclick="nav('s6')"><div class="card-title">Trials vs Results</div><p class="card-desc">456 registered. 2 in 3 report nothing.</p></div>
+      <div class="card" onclick="nav('s7')"><div class="card-title">Research vs Safety</div><p class="card-desc">9 in 10 papers: capability, not safety.</p></div>
+      <div class="card" onclick="nav('rp')"><div class="card-title">Revealed Preference</div><p class="card-desc">Where the field bets — and how ready those bets are</p></div>
+      <div class="card" onclick="nav('tp')"><div class="card-title">Augmentation, Not Automation</div><p class="card-desc">Healthcare AI assists. It does not replace. The task-level evidence.</p></div>
+    </div>
   </div>
 </section>
 
-<section id="f1"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 1</span></div><div class="fig-container" id="f1-chart"></div><button class="explain-toggle" onclick="toggle('ep-f1')">Show explanation</button><div class="explain-panel" id="ep-f1"><h2>Figure 1: AI alone outperforms the human-AI team</h2><p><strong>How to read:</strong> Each row is one randomised study (2024–2026). Grey dot = clinicians working alone. Blue dot = AI alone. Red open circle = clinicians using AI assistance. Where the red circle sits left of the blue dot, the human-AI team underperformed AI alone.</p><p><strong>Key finding:</strong> In 6 of 7 studies, AI alone outperforms the human-AI collaboration. Experienced physicians selectively override correct AI suggestions based on prior clinical intuition. The one exception: medical students without entrenched reasoning patterns collaborate more effectively with AI, exceeding AI-alone performance.</p><p><strong>Implication:</strong> We are deploying AI alongside clinicians assuming the combination will outperform both. The evidence says otherwise — without redesigning the collaboration interface, physicians using AI may perform worse than the AI would alone.</p><p><strong>Sources:</strong> Goh 2024 (JAMA Netw Open), Goh 2025 (Nature Medicine), McDuff 2025 (Nature), Wu 2025 (Critical Care), Qazi 2026 (Nature Health), Bentegeac 2026 (Kidney Int Reports), Roemer 2026 (BMC Med Educ). Expanded from Goh et al. Nat Med 2026 Supplementary Table 1.</p></div></section>
-<section id="f2a"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 2a</span></div><div class="fig-label">Large Frontier Models</div><div class="fig-container" id="f2a-chart"></div><button class="explain-toggle" onclick="toggle('ep-f2a')">Show explanation</button><div class="explain-panel" id="ep-f2a"><h2>Figure 2a: The Divergence — Large Frontier Models</h2><p><strong>How to read:</strong> Three benchmark domains tracked over time on a shared 0–100% scale. Green = general reasoning trend (GPQA Diamond, Epoch AI, 15 models). Blue = clinical performance (MAST Overall composite, 21 models). Red = safety (100 minus MAST Severe Harm Rate, 21 models). Blue and red use the same matched set of models.</p><p><strong>Key finding:</strong> General capability surged from ~49% to ~94% in 26 months. Clinical performance (MAST Overall) ranges from 45–75% and trends upward but remains 15–20pp below general capability. Safety scores (100 − severe harm rate) range from 75–92%, clustering around 80–85% — meaning the best frontier models still produce severe harm in roughly 1 in 10 clinical consultations.</p><p><strong>Data sources:</strong> Green line: Epoch AI GPQA Diamond (15 frontier models, trend only — different model set from blue/red). Blue and red: MAST leaderboard (arise-ai.org/mast, 21 large models with both Overall and Severe Rate scores, queried August 2026). Not all models appear on all three lines.</p></div></section>
-<section id="f2b"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 2b</span></div><div class="fig-label">Medium & Small Models</div><div class="fig-container" id="f2b-chart"></div><button class="explain-toggle" onclick="toggle('ep-f2b')">Show explanation</button><div class="explain-panel" id="ep-f2b"><h2>Figure 2b: The Divergence — Medium & Small Models</h2><p><strong>How to read:</strong> Same three domains as Figure 2a but for mini, flash, and open-source models. Green = general reasoning trend (GPQA Diamond, 17 models, trend only). Blue = clinical performance (MAST Overall, 18 models). Red = safety (100 − MAST Severe Rate, 18 models). Blue and red use the same matched model set.</p><p><strong>Key finding:</strong> For medium and small models, clinical capability tracks general capability more closely than for large frontier models — the blue line sits closer to green. However, safety remains the clear laggard, and small specialised models (MedGemma 4B) score as low as 33% on clinical performance and 75% on safety despite being purpose-built for medicine.</p><p><strong>Implication:</strong> Small models are increasingly deployed in resource-limited settings, consumer apps, and on-premise NHS infrastructure. The safety gap at this tier is the gap that will affect the most patients.</p><p><strong>Data sources:</strong> Green: Epoch AI GPQA Diamond (17 medium/small models, trend only). Blue and red: MAST leaderboard (arise-ai.org/mast, 18 matched models, queried August 2026).</p></div></section>
-<section id="f4"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 4</span></div><div class="fig-container" id="f4-chart"></div><button class="explain-toggle" onclick="toggle('ep-f4')">Show explanation</button><div class="explain-panel" id="ep-f4"><h2>Figure 4: Clinical AI Readiness Wheel</h2><p><strong>How to read:</strong> The wheel maps 16 clinical AI applications across four quadrants: Patient-Facing, Clinical Reasoning, Administrative, and System & Governance. Each segment extends outward proportional to its readiness score. A full segment reaching the outer ring = robust real-world deployment with published patient outcomes evidence. No application currently reaches that level.</p><p><strong>Scale:</strong> 0 = Nothing exists · 1 = In development (lab accuracy only) · 2 = Tested in practice (≥1 prospective study or RCT) · 3 = Regulatory pathway (FDA/CE clearance with clinical validation) · 4 = Deployed with evidence (real-world outcomes published)</p><p><strong>Key finding:</strong> Image interpretation is the only domain with regulatory-cleared AI backed by clinical validation (score 3: IDx-DR, Paige AI). Three domains — shared decision-making, referral processing, and audit — have zero published evidence. The majority sits at score 1: accuracy demonstrated on test data only, no prospective patient benefit.</p><p><strong>Scoring methodology:</strong> Scores assigned by clinical review (August 2026) drawing on the FDA AI/ML-Enabled Medical Device List (1,524 devices, June 2026), the MAST benchmark platform (July 2026 leaderboard), published prospective clinical trials (PubMed/ClinicalTrials.gov), and the ARISE State of Clinical AI Report 2026.</p></div></section>
-<section id="s5"><div class="hdr"><a class="back" onclick="nav('landing')">&larr; Figures</a><span class="fignum">Figure 5</span></div>
-<div class="wrap"><svg id="sv5" viewBox="0 0 900 430"></svg>
-<p class="note">FDA AI-Enabled Medical Device List by decision year &times; openFDA MAUDE report counts for each majority-AI product code &middot; 2026 is a part year</p>
-<button class="btn" onclick="tog('sp5')">Show explanation</button>
-<div class="panel" id="sp5"><h3>Authorisation accelerates. The record stays empty.</h3>
+<!-- FIGURE 1: AI vs Human -->
+<section id="f1">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">AI vs Human Performance</span></div>
+<div class="f1-layout">
+  <div class="f1-main"><div class="f1-panel-label">Text-based clinical tasks</div><div class="chart-wrap"><div id="f1-chart"></div></div></div>
+  <div class="f1-side"><div class="f1-panel-label">Multimodal clinical tasks</div><div class="pending-box"><div class="pending-inner"><div class="pending-title">Data pending</div><div class="pending-desc">Imaging and multimodal AI vs human studies to be added from ARISE systematic review</div></div></div></div>
+</div>
+<button class="explain-btn" onclick="toggle('ep-f1')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="ep-f1"><h2>AI vs Human Performance</h2>
+<p><strong>Left panel (text-based):</strong> Each row is one randomised study (2024 to 2026). Grey dot: clinicians alone. Blue dot: AI alone. Red open circle: clinicians using AI.</p>
+<p>In 6 of 7 studies, AI alone outperformed the human-AI team on text-based clinical tasks. Experienced physicians selectively overrode correct AI suggestions based on prior clinical intuition. The exception: medical students without entrenched reasoning collaborated more effectively with AI.</p>
+<p><strong>Right panel (multimodal):</strong> Data pending. Anastasia Perez Ternent and colleagues at ARISE have completed a systematic review of studies with human-AI arms across imaging and multimodal tasks, where the pattern may differ. In imaging studies, human-AI collaboration has shown diagnostic improvement, suggesting the text-based finding does not generalise across modalities.</p>
+<p><strong>Sources:</strong> Goh 2024 (JAMA Netw Open), Goh 2025 (Nature Medicine), McDuff 2025 (Nature), Wu 2025 (Critical Care), Qazi 2026 (Nature Health), Bentegeac 2026 (Kidney Int Reports), Roemer 2026 (BMC Med Educ).</p>
+</div>
+</section>
+
+<!-- FIGURE 2: The Divergence -->
+<section id="f2">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">The Divergence</span></div>
+<div class="chart-wrap"><div id="f2-chart"></div></div>
+<button class="explain-btn" onclick="toggle('ep-f2')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="ep-f2">
+<h2>The Divergence</h2>
+<p>Three domains tracked over time for 40 foundation models (May 2024 to July 2026). General reasoning capability is surging. Clinical task performance lags behind. Safety benchmark performance lags further still.</p>
+<p><strong>Green line:</strong> General Capability. Epoch AI GPQA Diamond scores for 32 models. Trend line only; different model set from the clinical and safety dots.</p>
+<p><strong>Blue dots:</strong> Clinical Eval. Mean of three MAST benchmarks: SCT-Bench (clinical reasoning), CPC-Bench Top-1 (diagnosis), and CRIMSON (reasoning under uncertainty). Models must score on at least 2 of 3. Filled circles are large/frontier models. Open circles are medium/small.</p>
+<p><strong>Red dots:</strong> Safety Eval. DoNoHarm v2 Balanced Accuracy: mean recall across all harm severity categories, treating rare severe harms equally with common benign ones. Same 40 models as the blue dots. A model scoring 30% correctly classifies harm severity less than a third of the time.</p>
+<p><strong>Source:</strong> MAST leaderboard (arise-ai.org/mast), August 2026. General capability: Epoch AI (epoch.ai). All benchmark evaluations, not deployment data.</p>
+</div>
+</section>
+
+<!-- FIGURE 3: The Detection Gap -->
+<section id="f2s">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">The Detection Gap</span></div>
+<div class="chart-wrap"><div id="f2s-chart"></div></div>
+<button class="explain-btn" onclick="toggle('ep-f2s')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="ep-f2s">
+<h2>The Detection Gap</h2>
+<p><strong>Left panel:</strong> Two benchmark harm rates from DoNoHarm v2. Blue: severe harm rate. Amber: omission rate (100 minus Recall). Both are improving. 39 models from MAST.</p>
+<p><strong>Right panel:</strong> If these models were deployed at scale, would existing post-market surveillance detect a safety signal? Monte Carlo simulation (10,000 iterations). The dashed connector between panels links the benchmark rates to the detection question.</p>
+<p><strong>Blue curve (commission):</strong> wrong advice acted on. The harm is visible. A patient deteriorates and the doctor traces it back. Detection reaches 94% by year 4.</p>
+<p><strong>Amber curve (omission):</strong> a referral not suggested, a test not ordered. Nobody connects the outcome to the AI. Detection: 0.6% at year 4.</p>
+<p><strong>Why the gap exists.</strong> Both curves use the same harm rate (0.1%), the same reporting system, and the same deployment scale. The only difference is attribution. When AI gives wrong advice, someone notices (P = 80%) and attributes it to the tool (P = 40%). When AI omits a recommendation, the chance of noticing drops to 30% and attribution to 2%. These probabilities are drawn from Beta distributions across 10,000 iterations using standard pharmacovigilance signal detection rules (PRR and BCPNN).</p>
+<p><strong>The cerivastatin comparator.</strong> A statin recalled at year 4 for causing rhabdomyolysis at a 0.1% rate. The same spontaneous reporting system that caught a dangerous drug in 4 years would need over 25 years to detect an AI omission at the same harm rate, and would succeed only 3.8% of the time.</p>
+<p><strong>80%+ of severe AI errors are omissions</strong> (NOHARM, Wu et al. 2026). The dominant harm type is the undetectable one.</p>
+<p><strong>Source:</strong> Khanna et al. (in preparation). Detection threshold calibrated against Sprint Fidelis ICD lead recall (575 reports/year).</p>
+</div>
+</section>
+
+<!-- FIGURE 4: Readiness Wheel -->
+<section id="f4">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">Clinical AI Readiness</span></div>
+<div class="chart-wrap" style="padding:20px"><div id="f4-chart"></div></div>
+<button class="explain-btn" onclick="toggle('ep-f4')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="ep-f4">
+<h2>Clinical AI Readiness</h2>
+<p>16 clinical AI applications scored on a 0 to 5 readiness scale. Each segment extends outward proportional to how far that application has progressed toward safe, evidence-based deployment.</p>
+<p><strong>The scale:</strong> 0 = no evidence. 1 = retrospective studies only. 2 = at least one prospective study. 3 = pre-regulatory pathway (CE mark, MHRA Airlock, breakthrough designation) or deployed commercially without regulation. 4 = FDA cleared (510(k) or De Novo). 5 = deployed at scale with published post-market outcomes data.</p>
+<p><strong>The amber segments.</strong> Five applications sit at rung 3 in amber: deployed at scale with no regulatory pathway. These are: triage (Epic, Babylon), differential diagnosis (Glass Health, OpenEvidence, Doximity Ask), prescribing (Epic CDS alerts at 85% of Epic customers), documentation (DAX Copilot serving approximately 600,000 clinicians, Abridge at 300+ health systems, Nabla at 85,000+ clinicians), and clinical coding (Epic Penny, 3M AI). None have FDA clearance. None are required to report adverse events.</p>
+<p><strong>The single green spike.</strong> Image interpretation is the only application reaching rung 5: 1,218 FDA-cleared devices, deployment at scale (Aidoc, Viz.ai), and post-market outcomes evidence (MASAI trial, 100,000+ women).</p>
+<p><strong>The purple segment.</strong> Symptom checking has CE marking in Europe (Ada Health, Babylon) but no FDA clearance.</p>
+<p><strong>The empty segments.</strong> Shared decision-making and audit have no meaningful published evidence or commercial product.</p>
+<p><strong>Sources:</strong> Evidence levels from publication corpus (3,086 papers tagged by clinical task and evidence level). FDA clearance from the FDA AI/ML-Enabled Medical Device List (1,524 devices, June 2026). Deployment data from vendor announcements and published implementation studies. Pre-regulatory status from CE mark registrations, MHRA AI Airlock Phase 2 report (July 2026), and FDA breakthrough device designations.</p>
+</div>
+</section>
+
+<!-- FIGURE 5: Cleared but Unmonitored -->
+<section id="s5">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">Cleared but Unmonitored</span></div>
+<div class="chart-wrap"><svg id="sv5" viewBox="0 0 900 430"></svg></div>
+<p class="source-note">FDA AI-Enabled Medical Device List by decision year &times; openFDA MAUDE report counts for each majority-AI product code &middot; 2026 is a part year</p>
+<button class="explain-btn" onclick="toggle('sp5')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="sp5"><h2>Authorisation accelerates. The record stays empty.</h2>
 <p><strong>The bars along the top.</strong> FDA authorisations of AI-enabled devices by year. 18 in 2016. 333 in 2025. 2026 is a part year and should not be read as a decline.</p>
 <p><strong>The strip below.</strong> Each of the 66 majority-AI product codes, ranked by how many adverse event reports it has ever received.</p>
-
 <h4>What the shape shows</h4>
 <p><strong>49 of the 66 codes have never received a single report.</strong> Not one, in the entire history of the database.</p>
 <p>Two cases deserve stating on their own.</p>
 <p><strong>QIH</strong> is the main code for automated radiological image processing. <strong>274 AI devices</strong> sit on it. Between them they have produced <strong>10 reports</strong>. Reading the narratives, 6 describe the same patient-record merge defect at one manufacturer, filed separately over eighteen months.</p>
 <p><strong>PIB</strong> is the code for autonomous diabetic retinopathy screening. This is AI that makes a diagnosis with no clinician reviewing it, first cleared in 2018 and the first of its kind ever authorised anywhere. Seven such devices are now marketed. In eight years the code has received <strong>one</strong> report, and it was filed by a bystander who watched the software miss glaucoma and report only that diabetic retinopathy was absent.</p>
-
 <h4>How to read this responsibly</h4>
 <p>Two explanations fit equally well. Either these devices are adjunctive, a clinician checks every output, and the safety net genuinely works. Or a wrong output that a clinician acts on is recorded as a clinical outcome and never reaches the regulator at all.</p>
-<p>Nothing in this data separates those two. Both would produce an empty database. That is the whole problem in one sentence, and it is why the answer to "is it safe to deploy at scale" cannot currently be evidence-based in either direction.</p>
+<p>Nothing in this data separates those two. Both would produce an empty database. That is the whole problem in one sentence, and it is why the answer to &ldquo;is it safe to deploy at scale&rdquo; cannot currently be evidence-based in either direction.</p>
+<div class="caveat"><p><strong>Also true.</strong> Devices cleared recently have had less time to accumulate reports, so part of the emptiness is simply youth. That does not explain PIB, where devices have been deployed for eight years, nor QIH, where 274 products have produced ten reports. Recalls behave the same way: 25 across 11 of the 66 codes, against 860 for a single conventional CT code.</p></div>
+</div>
+</section>
 
-<div class="caveat"><p><strong>Also true.</strong> Devices cleared recently have had less time to accumulate reports, so part of the emptiness is simply youth. That does not explain PIB, where devices have been deployed for eight years, nor QIH, where 274 products have produced ten reports. Recalls behave the same way: 25 across 11 of the 66 codes, against 860 for a single conventional CT code.</p></div></div></div></section>
-<section id="s6"><div class="hdr"><a class="back" onclick="nav('landing')">&larr; Figures</a><span class="fignum">Figure 6</span></div>
-<div class="wrap"><svg id="sv6" viewBox="0 0 900 400"></svg>
-<p class="note">ClinicalTrials.gov API v2, queried 14 Aug 2026 &middot; terms: "large language model" OR LLM OR "generative AI" OR ChatGPT OR "foundation model" &middot; publications identified by NCT-number linkage, not by literature search</p>
-<button class="btn" onclick="tog('sp6')">Show explanation</button>
-<div class="panel" id="sp6"><h3>The trials are running. The results are not appearing.</h3>
+<!-- FIGURE 6: Trials vs Results -->
+<section id="s6">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">Trials vs Results</span></div>
+<div class="chart-wrap"><svg id="sv6" viewBox="0 0 900 400"></svg></div>
+<p class="source-note">ClinicalTrials.gov API v2, queried August 2026 &middot; terms: &ldquo;large language model&rdquo; OR LLM OR &ldquo;generative AI&rdquo; OR ChatGPT OR &ldquo;foundation model&rdquo; &middot; publications identified by NCT-number linkage, not by literature search</p>
+<button class="explain-btn" onclick="toggle('sp6')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="sp6"><h2>The trials are running. The results are not appearing.</h2>
 <p>Figure 1 showed that regulatory surveillance for generative AI does not exist. This asks the obvious follow-up. If not there, then where? Clinical trials are the other place safety evidence is supposed to come from.</p>
-
 <h4>Counting results properly, not just results posted</h4>
 <p>The obvious version of this figure counts how many trials posted results to the register. That number is 5, and on its own it is misleading, because a trial can publish a full paper in a journal and never return to the register at all.</p>
 <p>So both routes are counted here. A trial is treated as having reported if either it posted results on the register, or a publication exists that is linked to its registration number. That linkage is automatic: when a paper cites its NCT number, PubMed records it and the register attaches it to the study. No literature search is involved.</p>
-
 <h4>How the figure is built, and why it is fair</h4>
 <p>Each bar is the set of trials that <strong>completed</strong> in that year. The solid portion inside the same bar is how many of those have since reported. Numerator and denominator are the same group, so the percentage cannot be inflated by mixing cohorts.</p>
 <p>Completion year is the right clock, not registration year. A trial registered in 2025 has mostly not finished, so grouping by registration would fill the recent bars with trials that could not possibly have reported yet. Grouping by completion starts counting only once reporting becomes possible.</p>
 <p><strong>Only the 2026 bar is marked too recent.</strong> A trial that finished this year has not had time to write up and publish.</p>
-
 <h4>What the mature cohorts say</h4>
 <p>Trials completing in 2023, 2024 and 2025 report at 40%, 43% and 31%. Across everything that completed between 2020 and 2025, 39 of 108 have reported.</p>
 <p><strong>So roughly two trials in three produce nothing anyone can find.</strong> That is stable across cohorts and is not an artefact of recency.</p>
-
 <h4>Why registration matters here</h4>
 <p>Registering a trial before it starts is what prevents selective reporting. It creates a public record of what was planned, so a study producing an unwelcome answer cannot quietly disappear. It is how we came to know about unpublished drug trials.</p>
 <p>Across all 148 completed trials, 5 posted results on the register and 42 have findings traceable by either route, leaving 106 with nothing. The gap between 5 and 42 matters: 37 completed trials did publish, just not where the register would show it. Counting only the register would have understated reporting eightfold.</p>
-
 <h4>The growth is the urgent part</h4>
 <p>2 trials first posted in 2021. 8 in 2022. 20 in 2023. 54 in 2024. 160 in 2025. 195 already in 2026 with months still to run.</p>
 <p>Activity is scaling roughly threefold a year while the published evidence base stays near nothing. The gap is widening, not closing.</p>
+<div class="caveat"><p><strong>The limitation of this method, stated plainly.</strong> A publication is only found if it cites the trial&rsquo;s registration number or the sponsor linked it manually. Papers reporting a registered trial without naming the registration are invisible to this approach, and that is known to be a substantial minority. So 42 is a floor and 106 is a ceiling, and the true reporting rate sits somewhere above 28%. This is automated record linkage, not a systematic review, and it should never be described as one. What it does establish is a lower bound on the problem using a method that can be re-run in minutes rather than months.</p></div>
+</div>
+</section>
 
-<div class="caveat"><p><strong>The limitation of this method, stated plainly.</strong> A publication is only found if it cites the trial's registration number or the sponsor linked it manually. Papers reporting a registered trial without naming the registration are invisible to this approach, and that is known to be a substantial minority. So 42 is a floor and 106 is a ceiling, and the true reporting rate sits somewhere above 28%. This is automated record linkage, not a systematic review, and it should never be described as one. What it does establish is a lower bound on the problem using a method that can be re-run in minutes rather than months.</p></div></div></div></section>
-<section id="s7"><div class="hdr"><a class="back" onclick="nav('landing')">&larr; Figures</a><span class="fignum">Figure 8</span></div>
-<div class="wrap"><svg id="sv7" viewBox="0 0 900 400"></svg>
-<p class="note">PubMed E-utilities by publication year &middot; clinical AI against the subset also indexed for safety, harm, error or adverse events &middot; 2026 excluded as a part year</p>
-<button class="btn" onclick="tog('sp7')">Show explanation</button>
-<div class="panel" id="sp7"><h3>The field grows faster than the study of its risks</h3>
+<!-- FIGURE 7: Research vs Safety -->
+<section id="s7">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">Research vs Safety</span></div>
+<div class="chart-wrap"><svg id="sv7" viewBox="0 0 900 400"></svg></div>
+<p class="source-note">PubMed E-utilities by publication year &middot; clinical AI against the subset also indexed for safety, harm, error or adverse events &middot; 2026 excluded as a part year</p>
+<button class="explain-btn" onclick="toggle('sp7')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="sp7"><h2>The field grows faster than the study of its risks</h2>
 <p><strong>The bars.</strong> Papers on clinical AI. 2,436 in 2020, 17,977 in 2025. Sevenfold in five years.</p>
 <p><strong>The line.</strong> The share of those papers also indexed under safety, harm, error or adverse events. 5.3% in 2020, 8.5% in 2025.</p>
-
 <h4>What this does and does not say</h4>
 <p>Safety research is growing faster than the field overall, from 129 papers to 1,534. That is a real improvement and should be stated plainly rather than buried.</p>
 <p>But more than nine papers in ten are still about what these systems can do rather than how they fail. And almost none of the safety literature is post-deployment. It is benchmark evaluation, bias auditing and prospective validation, all necessary, none of which tells you what happened after the system was switched on in a hospital.</p>
-
 <h4>Why this figure is included</h4>
-<p>Because counting research volume is a crude proxy for a field's maturity, and it becomes influential precisely because it is simple. The Stanford HAI index uses it. Applying the same crude proxy to safety shows the imbalance more directly than any argument would.</p>
+<p>Because counting research volume is a crude proxy for a field&rsquo;s maturity, and it becomes influential precisely because it is simple. The Stanford HAI index uses it. Applying the same crude proxy to safety shows the imbalance more directly than any argument would.</p>
 <p>Taken with the rest: the regulator records almost nothing, the trial register returns almost nothing, and the literature is overwhelmingly about capability. There is no source in which the safety evidence is quietly hiding.</p>
+<div class="caveat"><p><strong>Method limits.</strong> This uses keyword and indexing terms, so it will miss safety work that does not use those words and will catch papers mentioning safety only in passing. Absolute counts should be treated as approximate. The trend and the ratio are robust to reasonable changes in the search terms. 2026 is a part year and is excluded from the chart.</p></div>
+</div>
+</section>
 
-<div class="caveat"><p><strong>Method limits.</strong> This uses keyword and indexing terms, so it will miss safety work that does not use those words and will catch papers mentioning safety only in passing. Absolute counts should be treated as approximate. The trend and the ratio are robust to reasonable changes in the search terms. 2026 is a part year and is excluded from the chart.</p></div></div></div></section>
+<!-- FIGURE 8: Revealed Preference -->
+<section id="rp">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">Revealed Preference</span></div>
+<div class="chart-wrap" style="max-width:1220px"><svg id="svRP" viewBox="0 0 1100 500"></svg></div>
+<p class="source-note">FDA AI-Enabled Device List (through March 2026) &middot; Systematic review of ClinicalTrials.gov + WHO ICTRP, August 2026 (178 GenAI oncology trials) &middot; Market revenue: Precedence Research, MarketsandMarkets (2024&ndash;25 est.) &middot; Sources shown at equal visual weight to compare distribution</p>
+<button class="explain-btn" onclick="toggle('spRP')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="spRP">
+<h2>Where the field bets — and how ready those bets are</h2>
+<p><strong>Left panel.</strong> Three signals of revealed preference — where clinical AI investment actually flows. Each signal is normalised to equal visual weight so the chart compares distribution within each signal, not magnitude between them.</p>
+<h4>The three signals</h4>
+<p><strong>Regulatory clearance (blue):</strong> 1,524 FDA AI/ML-enabled device clearances. 82% are diagnostic imaging tools. Cardiovascular and neurology account for 17%. Treatment planning, patient engagement, and documentation have near-zero regulatory presence.</p>
+<p><strong>Market size (green):</strong> Sector revenue estimates. Clinical decision support ($3.95B) is the largest sector, followed by diagnostic imaging ($1.65B), patient engagement ($1.49B), and clinical documentation ($1.45B). Screening estimated at ~$0.6B.</p>
+<p><strong>Clinical trial investment (orange):</strong> 178 registered clinical trials testing generative AI or large language models in oncology. Diagnosis accounts for 37%, treatment planning 23%, patient engagement 19%.</p>
+<h4>Right panel — evidence readiness</h4>
+<p>For each of the five use cases, four binary trial-quality indicators are computed across all trials. <strong>Readiness</strong> is the mean of the four percentages.</p>
+<p><strong>Real patients:</strong> % using real patient data. <strong>Comparator:</strong> % with a control group or benchmark. <strong>Safety:</strong> % with any safety endpoint. <strong>Outcomes:</strong> % measuring any patient outcome.</p>
+<p>The highest readiness is Clinical Decision Support at 43%. The lowest is Screening at 22%. No use case exceeds 45%.</p>
+<h4>Key findings</h4>
+<p><strong>Regulatory and R&D are investing in different places.</strong> FDA clearances concentrate in diagnostic imaging. GenAI trials are diversifying into treatment planning, patient engagement, and screening — domains with near-zero regulatory presence.</p>
+<p><strong>Market investment does not predict evidence quality.</strong> Clinical decision support has the largest market ($3.95B) and the highest readiness (43%), but still only 32% of trials measure safety.</p>
+<div class="caveat"><p><strong>Scope differences.</strong> FDA and market data cover all clinical AI. The trial data is GenAI in oncology specifically. Market figures are revenue estimates, not VC investment; they are the best available proxy for where private capital flows by use case. Screening market size estimated from adjacent segments.</p></div>
+</div>
+</section>
+
+
+<section id="tp">
+<div class="fig-header"><a class="back-btn" onclick="nav('landing')">&larr; Figures</a><span class="fig-label">Augmentation, Not Automation</span></div>
+<div class="chart-wrap"><svg id="svTP" viewBox="0 0 900 430"></svg></div>
+<p class="source-note">Anthropic Economic Index v1&ndash;v2 (2025), observed Claude API usage classified by O*NET task taxonomy &middot; Healthcare tasks extracted from job_exposure and task-level datasets &middot; Overall AI baseline from same source</p>
+<button class="explain-btn" onclick="toggle('ep-tp')">Methodology &amp; interpretation</button>
+<div class="explain-panel" id="ep-tp"><h2>AI assists healthcare. It does not replace it.</h2>
+<p>The Anthropic Economic Index classifies real-world Claude API usage into <strong>automation</strong> (AI performs the task) and <strong>augmentation</strong> (AI assists a human performing the task). This figure shows that classification for five healthcare tasks, with the overall AI baseline for comparison.</p>
+<p>Patient advisory tasks (treatment advice, prevention counselling) show <strong>0% automation and near-100% augmentation</strong>. Even analytical tasks (diagnosis, interpreting histories) are predominantly augmentation. Healthcare is an outlier: overall AI usage is roughly 50/50 automation&ndash;augmentation, but healthcare skews almost entirely to augmentation.</p>
+<p>The pattern: AI in healthcare currently assists clinicians with information processing. It does not independently make clinical decisions or directly advise patients.</p>
+<div class="caveat"><p><strong>Limits.</strong> AEI captures only Claude API usage, not all AI tools. Dedicated clinical AI devices (imaging, ECG interpretation) would not appear. The finding is that <em>general-purpose LLM usage</em> in healthcare is augmentation-dominant &mdash; dedicated device-based AI may show different patterns. Tasks are from O*NET taxonomy; real clinical workflows are more granular.</p></div></div>
+</section>
+
+
+<div id="tooltip" class="tooltip"></div>
 
 <script>
-
-let current='landing';
+// === NAVIGATION & UTILITIES ===
 function toggle(id){document.getElementById(id).classList.toggle('show')}
-function tog(id){document.getElementById(id).classList.toggle('show')}
-
 function nav(id){
-  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('section').forEach(function(s){s.classList.remove('active')});
   document.getElementById(id).classList.add('active');
-  current=id;
   window.scrollTo(0,0);
-  // Render safety figures on demand
-  if(id==='s5' && typeof sf5==='function') sf5();
-  if(id==='s6' && typeof sf6==='function') sf6();
-  if(id==='s7' && typeof sf7==='function') sf7();
-  history.pushState({page:id},'','#'+id);
+  history.replaceState(null,'',id==='landing'?location.pathname:'#'+id);
+  if(id==='s5'&&typeof sf5==='function')sf5();
+  if(id==='s6'&&typeof sf6==='function')sf6();
+  if(id==='s7'&&typeof sf7==='function')sf7();
+  if(id==='rp'&&typeof sfRP==='function')sfRP();
+  if(id==='tp'&&typeof sfTP==='function')sfTP();
 }
-window.addEventListener('popstate',e=>{
-  const id=e.state?.page||location.hash.slice(1)||'landing';
-  nav(id);
+window.addEventListener('hashchange',function(){var id=location.hash.slice(1)||'landing';nav(id)});
+window.addEventListener('DOMContentLoaded',function(){var id=location.hash.slice(1);if(id)nav(id)});
+
+// === TOOLTIP ===
+var tipEl=document.getElementById('tooltip');
+document.addEventListener('mouseover',function(e){
+  if(e.target.hasAttribute('data-tip')){
+    tipEl.textContent=e.target.getAttribute('data-tip');
+    tipEl.classList.add('show');
+    tipEl.style.left=Math.min(e.clientX+12,window.innerWidth-340)+'px';
+    tipEl.style.top=(e.clientY-40)+'px';
+  }
 });
-const validIds=['f1','f2a','f2b','f4','s5','s6','s7'];
-if(location.hash && validIds.includes(location.hash.slice(1))){
-  nav(location.hash.slice(1));
-}
+document.addEventListener('mousemove',function(e){
+  if(tipEl.classList.contains('show')){
+    tipEl.style.left=Math.min(e.clientX+12,window.innerWidth-340)+'px';
+    tipEl.style.top=(e.clientY-40)+'px';
+  }
+});
+document.addEventListener('mouseout',function(e){
+  if(e.target.hasAttribute('data-tip'))tipEl.classList.remove('show');
+});
 
-// === NAVIGATION ===
-,'','');
-}
-
-// === FIGURE 1 ===
+// === FIGURE 1: AI vs Human Performance ===
 (function(){
-const studies=[
+var studies=[
   {l:'Physicians',t:'Diagnostic reasoning',r:'Goh 2024',p:74,tm:76,a:92},
   {l:'Physicians',t:'Management reasoning',r:'Goh 2025',p:35.7,tm:43.0,a:43.7},
   {l:'Physicians',t:'Differential diagnosis',r:'McDuff 2025',p:44.4,tm:51.7,a:59.1},
   {l:'Physicians (Residents)',t:'Critical illness',r:'Wu 2025',p:27,tm:58,a:60},
   {l:'Physicians (LMIC)',t:'Diagnostic reasoning',r:'Qazi 2026',p:42.6,tm:71.4,a:82.9},
   {l:'Physicians (Nephrology)',t:'Diagnostic reasoning',r:'Bentegeac 2026',p:37.2,tm:57.5,a:77.1},
-  {l:'Medical Students',t:'Rheumatology',r:'Roemer 2026',p:32.4,tm:77.5,a:71.6},
+  {l:'Medical Students',t:'Rheumatology',r:'Roemer 2026',p:32.4,tm:77.5,a:71.6}
 ];
-const W=900,rH=50,pL=240,pR=30,pT=40,cW=W-pL-pR,H=pT+studies.length*rH+30;
-const xS=v=>pL+((v-20)/80)*cW;
-let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
-[40,60,80,100].forEach(v=>{s+=`<line x1="${xS(v)}" y1="${pT}" x2="${xS(v)}" y2="${H-24}" stroke="#1e293b"/><text x="${xS(v)}" y="${pT-6}" text-anchor="middle" fill="#475569" font-size="9" font-family="Inter">${v}%</text>`});
-studies.forEach((d,i)=>{
-  const cy=pT+i*rH+rH/2;
-  if(i%2===0)s+=`<rect x="0" y="${cy-rH/2}" width="${W}" height="${rH}" fill="#1e293b" opacity="0.3"/>`;
-  s+=`<text x="${pL-10}" y="${cy-7}" text-anchor="end" fill="#e2e8f0" font-size="11" font-weight="600" font-family="Inter">${d.l}</text>`;
-  s+=`<text x="${pL-10}" y="${cy+8}" text-anchor="end" fill="#64748b" font-size="9" font-family="Inter">${d.t} · ${d.r}</text>`;
-  const vals=[d.p,d.tm,d.a];
-  s+=`<line x1="${xS(Math.min(...vals))}" y1="${cy}" x2="${xS(Math.max(...vals))}" y2="${cy}" stroke="#475569" stroke-width="2" stroke-linecap="round"/>`;
-  s+=`<circle cx="${xS(d.p)}" cy="${cy}" r="5.5" fill="#6b7280" stroke="#0f172a" stroke-width="1.5"/>`;
-  s+=`<circle cx="${xS(d.a)}" cy="${cy}" r="5.5" fill="#3b82f6" stroke="#0f172a" stroke-width="1.5"/>`;
-  s+=`<circle cx="${xS(d.tm)}" cy="${cy}" r="7" fill="none" stroke="#ef4444" stroke-width="2.5"/>`;
+var W=900,rH=52,pL=240,pR=30,pT=40,cW=W-pL-pR,H=pT+studies.length*rH+36;
+var xS=function(v){return pL+((v-20)/80)*cW};
+var s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
+s+='<rect width="'+W+'" height="'+H+'" fill="#fff" rx="0"/>';
+[40,60,80,100].forEach(function(v){
+  s+='<line x1="'+xS(v)+'" y1="'+pT+'" x2="'+xS(v)+'" y2="'+(H-30)+'" stroke="#E2EEEF" stroke-dasharray="4 4"/>';
+  s+='<text x="'+xS(v)+'" y="'+(pT-8)+'" text-anchor="middle" fill="#5C7A80" font-size="11" font-family="Inter" font-weight="500">'+v+'%</text>';
 });
-const ly=H-10;
-s+=`<circle cx="${pL}" cy="${ly}" r="4" fill="#6b7280"/><text x="${pL+10}" y="${ly+4}" fill="#64748b" font-size="9" font-family="Inter">Human alone</text>`;
-s+=`<circle cx="${pL+100}" cy="${ly}" r="4" fill="#3b82f6"/><text x="${pL+110}" y="${ly+4}" fill="#64748b" font-size="9" font-family="Inter">AI alone</text>`;
-s+=`<circle cx="${pL+180}" cy="${ly}" r="5" fill="none" stroke="#ef4444" stroke-width="2"/><text x="${pL+190}" y="${ly+4}" fill="#64748b" font-size="9" font-family="Inter">Human + AI</text>`;
-s+=`</svg>`;
+studies.forEach(function(d,i){
+  var cy=pT+i*rH+rH/2;
+  if(i%2===0)s+='<rect x="0" y="'+(cy-rH/2)+'" width="'+W+'" height="'+rH+'" fill="#F7FAFA"/>';
+  s+='<text x="'+(pL-12)+'" y="'+(cy-7)+'" text-anchor="end" fill="#0F1B1E" font-size="12" font-weight="600" font-family="Inter">'+d.l+'</text>';
+  s+='<text x="'+(pL-12)+'" y="'+(cy+8)+'" text-anchor="end" fill="#8BA0A5" font-size="10" font-family="Inter">'+d.t+' · '+d.r+'</text>';
+  var vals=[d.p,d.tm,d.a];
+  s+='<line x1="'+xS(Math.min.apply(null,vals))+'" y1="'+cy+'" x2="'+xS(Math.max.apply(null,vals))+'" y2="'+cy+'" stroke="#C8D8DB" stroke-width="2" stroke-linecap="round"/>';
+  s+='<circle cx="'+xS(d.p)+'" cy="'+cy+'" r="5.5" fill="#8BA0A5" stroke="#fff" stroke-width="1.5" data-tip="Human alone: '+d.p+'%"/>';
+  s+='<circle cx="'+xS(d.a)+'" cy="'+cy+'" r="5.5" fill="#2563EB" stroke="#fff" stroke-width="1.5" data-tip="AI alone: '+d.a+'%"/>';
+  s+='<circle cx="'+xS(d.tm)+'" cy="'+cy+'" r="7" fill="none" stroke="#DC2626" stroke-width="2.5" data-tip="Human + AI: '+d.tm+'%"/>';
+});
+var ly=H-12;
+s+='<circle cx="'+pL+'" cy="'+ly+'" r="4" fill="#8BA0A5"/><text x="'+(pL+10)+'" y="'+(ly+4)+'" fill="#5C7A80" font-size="11" font-family="Inter">Human alone</text>';
+s+='<circle cx="'+(pL+110)+'" cy="'+ly+'" r="4" fill="#2563EB"/><text x="'+(pL+120)+'" y="'+(ly+4)+'" fill="#5C7A80" font-size="11" font-family="Inter">AI alone</text>';
+s+='<circle cx="'+(pL+195)+'" cy="'+ly+'" r="5" fill="none" stroke="#DC2626" stroke-width="2"/><text x="'+(pL+205)+'" y="'+(ly+4)+'" fill="#5C7A80" font-size="11" font-family="Inter">Human + AI</text>';
+s+='</svg>';
 document.getElementById('f1-chart').innerHTML=s;
 })();
 
-// === FIGURE 2a — LARGE FRONTIER MODELS (updated with MAST leaderboard Aug 2026) ===
+// === FIGURE 2: THE DIVERGENCE (40 models) ===
 (function(){
-const el=document.getElementById('f2a-chart');
-const PAD={top:20,right:120,bottom:40,left:50},W=920,H=400;
-const plotW=W-PAD.left-PAD.right,plotH=H-PAD.top-PAD.bottom;
-function toYr(d){const p=d.split('-');return +p[0]+(+p[1]-1)/12+(+p[2]||15)/365}
-const xMin=2024.0,xMax=2026.85,yMin=15,yMax=100;
+var el=document.getElementById('f2-chart');
+var W=900,H=400,PAD={top:28,right:150,bottom:44,left:54};
+var mainH=340,plotW=W-PAD.left-PAD.right;
+function toYr(d){var p=d.split('-');return +p[0]+(+p[1]-1)/12+(+p[2]||15)/365}
+var xMin=2024.0,xMax=2026.85;
 function sx(v){return PAD.left+(v-xMin)/(xMax-xMin)*plotW}
-function sy(v){return PAD.top+(1-(v-yMin)/(yMax-yMin))*plotH}
+function syM(v){return PAD.top+(1-v/100)*(mainH-PAD.top)}
 
-// GREEN: General capability (Epoch AI GPQA Diamond) — trend line only, no dots
-const gen=[['2024-05-13',48.9],['2024-09-12',50.3],['2024-09-24',57.2],['2024-12-17',76.8],['2025-01-20',69.2],['2025-02-24',78.5],['2025-03-25',83.8],['2025-04-16',81.8],['2025-08-07',86.2],['2025-11-18',92.6],['2025-12-11',91.4],['2026-02-19',94.4],['2026-03-05',93.3],['2026-04-23',94.0],['2026-07-09',93.5]];
+var gen=[[2024.37,48.9],[2024.7,50.3],[2024.73,57.2],[2024.96,76.8],[2025.05,69.2],[2025.15,78.5],[2025.23,83.8],[2025.29,81.8],[2025.6,86.2],[2025.88,92.6],[2025.95,91.4],[2026.14,94.4],[2026.18,93.3],[2026.31,94.0],[2026.52,93.5],[2024.48,36.5],[2024.7,62.4],[2024.81,55.3],[2025.08,77.0],[2025.26,67.0],[2025.29,79.6],[2025.39,78.3],[2025.6,75.0],[2025.6,69.4],[2025.75,82.3],[2025.96,89.4],[2026.13,87.4],[2026.17,81.8],[2026.21,86.9],[2026.38,92.8],[2026.5,90.5],[2026.56,94.1]];
+var clin=[['2024-05-13',52.7,'GPT-4o','L'],['2024-10-29',46.0,'Claude Haiku 4.5','S'],['2024-12-01',49.1,'Gemini 2.0 Flash','M'],['2025-03-25',48.7,'Gemini 2.5 Flash','M'],['2025-03-25',43.3,'Gemini 2.5 Pro','L'],['2025-04-05',50.4,'Llama 4 Maverick','L'],['2025-04-05',45.2,'Llama 4 Scout','S'],['2025-04-14',48.1,'GPT-4.1 mini','M'],['2025-04-14',52.3,'GPT-4.1','L'],['2025-06-01',47.3,'MedGemma 27B IT','S'],['2025-06-01',52.6,'MedGemma 4B IT','S'],['2025-08-07',51.1,'GPT-5 mini','M'],['2025-08-07',55.9,'GPT-5','L'],['2025-09-01',40.7,'MedGemma 1.5 4B IT','S'],['2025-09-29',51.8,'Claude Opus 4.5','L'],['2025-09-29',50.4,'Claude Sonnet 4.5','M'],['2025-12-11',55.4,'GPT-5.2','L'],['2025-12-17',58.3,'Gemini 3 Flash','M'],['2026-01-15',51.9,'Kimi K2.5','M'],['2026-02-17',52.4,'Claude Opus 4.6','L'],['2026-02-17',49.2,'Claude Sonnet 4.6','M'],['2026-02-19',59.3,'Gemini 3.1 Pro','L'],['2026-03-05',53.0,'GPT-5.4','L'],['2026-03-14',55.6,'Claude Opus 4.7','L'],['2026-03-17',45.1,'GPT-5.4 mini','M'],['2026-04-01',55.4,'Kimi K2.6','L'],['2026-04-23',57.4,'GPT-5.5','L'],['2026-05-19',55.9,'Gemini 3.5 Flash','M'],['2026-05-22',57.9,'Claude Opus 4.8','L'],['2026-06-01',57.9,'Qwen3.5 397B A17B','L'],['2026-06-15',56.5,'Kimi K3','L'],['2026-06-30',50.8,'Claude Fable 5','M'],['2026-06-30',54.5,'Claude Opus 5','L'],['2026-06-30',56.0,'Claude Sonnet 5','M'],['2026-07-01',54.9,'Grok 4 Fast','M'],['2026-07-01',53.9,'Grok 4','L'],['2026-07-01',60.6,'Muse Spark 1.1','M'],['2026-07-09',58.3,'GPT-5.6 Sol','L'],['2026-07-15',58.3,'Grok 4.3','L'],['2026-07-21',57.9,'Gemini 3.6 Flash','M']];
+var saf=[['2024-05-13',29.4,'GPT-4o','L'],['2024-10-29',23.3,'Claude Haiku 4.5','S'],['2024-12-01',30.5,'Gemini 2.0 Flash','M'],['2025-03-25',30.0,'Gemini 2.5 Flash','M'],['2025-03-25',30.0,'Gemini 2.5 Pro','L'],['2025-04-05',28.7,'Llama 4 Maverick','L'],['2025-04-05',28.3,'Llama 4 Scout','S'],['2025-04-14',27.4,'GPT-4.1 mini','M'],['2025-04-14',30.8,'GPT-4.1','L'],['2025-06-01',19.8,'MedGemma 27B IT','S'],['2025-06-01',14.0,'MedGemma 4B IT','S'],['2025-08-07',33.1,'GPT-5 mini','M'],['2025-08-07',33.8,'GPT-5','L'],['2025-09-01',9.8,'MedGemma 1.5 4B IT','S'],['2025-09-29',32.4,'Claude Opus 4.5','L'],['2025-09-29',27.9,'Claude Sonnet 4.5','M'],['2025-12-11',35.9,'GPT-5.2','L'],['2025-12-17',35.9,'Gemini 3 Flash','M'],['2026-01-15',30.3,'Kimi K2.5','M'],['2026-02-17',29.6,'Claude Opus 4.6','L'],['2026-02-17',28.1,'Claude Sonnet 4.6','M'],['2026-02-19',40.3,'Gemini 3.1 Pro','L'],['2026-03-05',37.6,'GPT-5.4','L'],['2026-03-14',33.2,'Claude Opus 4.7','L'],['2026-03-17',32.1,'GPT-5.4 mini','M'],['2026-04-01',31.9,'Kimi K2.6','L'],['2026-04-23',31.7,'GPT-5.5','L'],['2026-05-19',39.7,'Gemini 3.5 Flash','M'],['2026-05-22',34.7,'Claude Opus 4.8','L'],['2026-06-01',33.7,'Qwen3.5 397B A17B','L'],['2026-06-15',34.9,'Kimi K3','L'],['2026-06-30',36.3,'Claude Fable 5','M'],['2026-06-30',32.3,'Claude Opus 5','L'],['2026-06-30',31.5,'Claude Sonnet 5','M'],['2026-07-01',29.0,'Grok 4 Fast','M'],['2026-07-01',30.4,'Grok 4','L'],['2026-07-01',49.1,'Muse Spark 1.1','M'],['2026-07-09',32.2,'GPT-5.6 Sol','L'],['2026-07-15',32.4,'Grok 4.3','L'],['2026-07-21',36.6,'Gemini 3.6 Flash','M']];
 
-// BLUE: Clinical capability (MAST Overall) — 21 matched models with dots
-const clin=[['2025-01-20',55.2,'DeepSeek R1'],['2025-03-25',58.3,'Gemini 2.5 Pro'],['2025-04-05',45.6,'Llama 4 Maverick'],['2025-04-14',62.3,'GPT-4.1'],['2025-08-07',72.6,'GPT-5'],['2025-09-29',63.5,'Claude Opus 4.5'],['2025-12-11',70.6,'GPT-5.2'],['2026-02-17',65.8,'Claude Opus 4.6'],['2026-02-19',62.9,'Gemini 3.1 Pro'],['2026-03-01',59.8,'GLM 5.1'],['2026-03-05',68.7,'GPT-5.4'],['2026-03-14',69.8,'Claude Opus 4.7'],['2026-04-01',64.4,'Kimi K2.6'],['2026-04-23',74.1,'GPT-5.5'],['2026-05-01',59.4,'DeepSeek V4 Pro'],['2026-05-22',68.3,'Claude Opus 4.8'],['2026-06-01',62.8,'Qwen3.5'],['2026-06-15',75.0,'Kimi K3'],['2026-06-30',73.8,'Claude Opus 5'],['2026-07-09',73.7,'GPT-5.6 Sol'],['2026-07-15',58.2,'Grok 4.3']];
+function linFit(xs,ys){var n=xs.length,mx=xs.reduce(function(a,b){return a+b},0)/n,my=ys.reduce(function(a,b){return a+b},0)/n;var num=0,den=0;for(var i=0;i<n;i++){num+=(xs[i]-mx)*(ys[i]-my);den+=(xs[i]-mx)*(xs[i]-mx)}return{m:num/den,b:my-(num/den)*mx}}
+function trend(xs,ys){var f=linFit(xs,ys),x0=Math.min.apply(null,xs),x1=Math.max.apply(null,xs),pts=[];for(var i=0;i<=100;i++){var x=x0+(x1-x0)*i/100;pts.push([sx(x),syM(Math.max(0,Math.min(100,f.m*x+f.b)))])}return{pts:pts,endY:pts[pts.length-1][1]}}
+function pathD(pts){return'M'+pts.map(function(p){return p.join(',')}).join('L')}
+function dot(x,y,col,sz,tip){
+  if(sz==='L')return'<circle cx="'+x+'" cy="'+y+'" r="3.5" fill="'+col+'" opacity="0.85" data-tip="'+tip+'"/>';
+  if(sz==='M')return'<circle cx="'+x+'" cy="'+y+'" r="3.5" fill="none" stroke="'+col+'" stroke-width="1.5" opacity="0.8" data-tip="'+tip+'"/>';
+  return'<rect x="'+(x-2.5)+'" y="'+(y-2.5)+'" width="5" height="5" fill="'+col+'" opacity="0.85" transform="rotate(45 '+x+' '+y+')" data-tip="'+tip+'"/>';
+}
 
-// RED: Safety (100 - MAST Severe_rate) — same 21 matched models with dots
-const saf=[['2025-01-20',83.8,'DeepSeek R1'],['2025-03-25',85.6,'Gemini 2.5 Pro'],['2025-04-05',74.6,'Llama 4 Maverick'],['2025-04-14',81.6,'GPT-4.1'],['2025-08-07',86.6,'GPT-5'],['2025-09-29',79.8,'Claude Opus 4.5'],['2025-12-11',86.4,'GPT-5.2'],['2026-02-17',81.8,'Claude Opus 4.6'],['2026-02-19',82.2,'Gemini 3.1 Pro'],['2026-03-01',82.7,'GLM 5.1'],['2026-03-05',87.3,'GPT-5.4'],['2026-03-14',83.4,'Claude Opus 4.7'],['2026-04-01',83.4,'Kimi K2.6'],['2026-04-23',89.5,'GPT-5.5'],['2026-05-01',79.8,'DeepSeek V4 Pro'],['2026-05-22',82.4,'Claude Opus 4.8'],['2026-06-01',83.4,'Qwen3.5'],['2026-06-15',91.6,'Kimi K3'],['2026-06-30',88.6,'Claude Opus 5'],['2026-07-09',89.6,'GPT-5.6 Sol'],['2026-07-15',77.6,'Grok 4.3']];
+var gX=gen.map(function(r){return r[0]}),gY=gen.map(function(r){return r[1]});
+var cX=clin.map(function(r){return toYr(r[0])}),cY=clin.map(function(r){return r[1]});
+var sX=saf.map(function(r){return toYr(r[0])}),sY=saf.map(function(r){return r[1]});
+var gT=trend(gX,gY),cT=trend(cX,cY),sT=trend(sX,sY);
 
-function linFit(xs,ys){const n=xs.length,mx=xs.reduce((a,b)=>a+b,0)/n,my=ys.reduce((a,b)=>a+b,0)/n;let num=0,den=0;for(let i=0;i<n;i++){num+=(xs[i]-mx)*(ys[i]-my);den+=(xs[i]-mx)**2}return{m:num/den,b:my-(num/den)*mx}}
-function trend(xs,ys){const f=linFit(xs,ys),x0=Math.min(...xs),x1=Math.max(...xs),pts=[];for(let i=0;i<=100;i++){const x=x0+(x1-x0)*i/100;pts.push([sx(x),sy(Math.max(yMin,Math.min(yMax,f.m*x+f.b)))])}return{pts,f,endY:pts[pts.length-1][1]}}
+var s='<svg viewBox="0 0 '+W+' '+H+'">';
+s+='<rect width="'+W+'" height="'+H+'" fill="#fff" rx="0"/>';
 
-const gX=gen.map(r=>toYr(r[0])),gY=gen.map(r=>r[1]);
-const cX=clin.map(r=>toYr(r[0])),cY=clin.map(r=>r[1]);
-const sX=saf.map(r=>toYr(r[0])),sY=saf.map(r=>r[1]);
-const gT=trend(gX,gY),cT=trend(cX,cY),sT=trend(sX,sY);
+[2024.5,2025,2025.5,2026,2026.5].forEach(function(yr){var x=sx(yr);s+='<line x1="'+x+'" y1="'+PAD.top+'" x2="'+x+'" y2="'+mainH+'" stroke="#E2EEEF" stroke-dasharray="4 4"/>';if(Number.isInteger(yr))s+='<text x="'+x+'" y="'+(mainH+16)+'" text-anchor="middle" fill="#5C7A80" font-size="11" font-family="Inter" font-weight="500">'+yr+'</text>'});
+[0,20,40,60,80,100].forEach(function(v){var y=syM(v);s+='<line x1="'+PAD.left+'" y1="'+y+'" x2="'+(W-PAD.right)+'" y2="'+y+'" stroke="'+(v===0?'#A8BEC2':'#E2EEEF')+'"'+(v===0?'':' stroke-dasharray="4 4"')+'/><text x="'+(PAD.left-10)+'" y="'+(y+4)+'" text-anchor="end" fill="#5C7A80" font-size="10" font-family="Inter">'+v+'%</text>'});
 
-let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
-// Grid
-[2024.5,2025,2025.5,2026,2026.5].forEach(yr=>{const x=sx(yr);s+=`<line x1="${x}" y1="${PAD.top}" x2="${x}" y2="${H-PAD.bottom}" stroke="#1e293b"/>`;if(Number.isInteger(yr))s+=`<text x="${x}" y="${H-PAD.bottom+18}" text-anchor="middle" fill="#64748b" font-size="11" font-family="Inter">${yr}</text>`});
-[20,40,60,80,100].forEach(v=>{const y=sy(v);s+=`<line x1="${PAD.left}" y1="${y}" x2="${W-PAD.right}" y2="${y}" stroke="#1e293b" stroke-width="0.5" opacity="0.4"/><text x="${PAD.left-8}" y="${y+4}" text-anchor="end" fill="#475569" font-size="9" font-family="Inter">${v}%</text>`});
-function pathD(pts){return'M'+pts.map(p=>p.join(',')).join('L')}
-// Green: trend line only, no dots
-s+=`<path d="${pathD(gT.pts)}" stroke="#22c55e" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-// Blue and red: trend lines
-s+=`<path d="${pathD(cT.pts)}" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-s+=`<path d="${pathD(sT.pts)}" stroke="#ef4444" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-// Blue and red: data points with tooltips
-clin.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#3b82f6" opacity="0.6"><title>${r[2]}: ${r[1]}% (MAST Overall)</title></circle>`});
-saf.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#ef4444" opacity="0.6"><title>${r[2]}: ${r[1]}% (100 − Severe rate)</title></circle>`});
-// Labels at end of each trend
-const gEndX=Math.max(...gX);
-s+=`<text x="${sx(gEndX)+8}" y="${gT.endY}" fill="#22c55e" font-size="11" font-weight="600" font-family="Inter">General</text>`;
-s+=`<text x="${sx(Math.max(...cX))+8}" y="${cT.endY}" fill="#3b82f6" font-size="11" font-weight="600" font-family="Inter">Clinical</text>`;
-s+=`<text x="${sx(Math.max(...sX))+8}" y="${sT.endY}" fill="#ef4444" font-size="11" font-weight="600" font-family="Inter">Safety</text>`;
-s+=`</svg>`;
+s+='<path d="'+pathD(gT.pts)+'" stroke="#059669" stroke-width="2.5" fill="none" opacity="0.8" stroke-linecap="round"/>';
+s+='<path d="'+pathD(cT.pts)+'" stroke="#2563EB" stroke-width="2.5" fill="none" opacity="0.8" stroke-linecap="round"/>';
+s+='<path d="'+pathD(sT.pts)+'" stroke="#DC2626" stroke-width="2.5" fill="none" opacity="0.8" stroke-linecap="round"/>';
+
+clin.forEach(function(r){s+=dot(sx(toYr(r[0])),syM(r[1]),'#2563EB',r[3],r[2]+': '+r[1]+'%')});
+saf.forEach(function(r){s+=dot(sx(toYr(r[0])),syM(r[1]),'#DC2626',r[3],r[2]+': '+r[1]+'%')});
+
+s+='<text x="'+(sx(2026.85)+8)+'" y="'+(gT.endY+4)+'" fill="#059669" font-size="11" font-weight="600" font-family="Inter">General Capability</text>';
+s+='<text x="'+(sx(2026.85)+8)+'" y="'+(cT.endY+4)+'" fill="#2563EB" font-size="11" font-weight="600" font-family="Inter">Clinical Eval</text>';
+s+='<text x="'+(sx(2026.85)+8)+'" y="'+(sT.endY+4)+'" fill="#DC2626" font-size="11" font-weight="600" font-family="Inter">Safety Eval</text>';
+
+s+='<circle cx="'+PAD.left+'" cy="'+(H-14)+'" r="3.5" fill="#5C7A80"/><text x="'+(PAD.left+10)+'" y="'+(H-10)+'" fill="#5C7A80" font-size="10" font-family="Inter">Large</text>';
+s+='<circle cx="'+(PAD.left+70)+'" cy="'+(H-14)+'" r="3.5" fill="none" stroke="#5C7A80" stroke-width="1.5"/><text x="'+(PAD.left+80)+'" y="'+(H-10)+'" fill="#5C7A80" font-size="10" font-family="Inter">Medium / Small</text>';
+s+='</svg>';
 el.innerHTML=s;
 })();
 
-// === FIGURE 2b — MEDIUM & SMALL MODELS (updated with MAST leaderboard Aug 2026) ===
+// === FIGURE 3: THE DETECTION GAP (side-by-side) ===
 (function(){
-const el=document.getElementById('f2b-chart');
-const PAD={top:20,right:120,bottom:40,left:50},W=920,H=400;
-const plotW=W-PAD.left-PAD.right,plotH=H-PAD.top-PAD.bottom;
-function toYr(d){const p=d.split('-');return +p[0]+(+p[1]-1)/12+(+p[2]||15)/365}
-const xMin=2024.3,xMax=2026.85,yMin=15,yMax=100;
-function sx(v){return PAD.left+(v-xMin)/(xMax-xMin)*plotW}
-function sy(v){return PAD.top+(1-(v-yMin)/(yMax-yMin))*plotH}
+var el=document.getElementById('f2s-chart');
+var W=1030,H=440;
 
-// GREEN: General capability (Epoch AI GPQA Diamond) — trend line only, no dots
-const gen=[['2024-06-24',36.5],['2024-09-12',62.4],['2024-10-22',55.3],['2025-01-31',77.0],['2025-04-05',67.0],['2025-04-16',79.6],['2025-05-22',78.3],['2025-08-07',75.0],['2025-08-07',69.4],['2025-09-29',82.3],['2025-12-17',89.4],['2026-02-17',87.4],['2026-03-03',81.8],['2026-03-17',86.9],['2026-05-19',92.8],['2026-06-30',90.5],['2026-07-21',94.1]];
+// Side-by-side panel positions
+var p1L=65,p1R=430,p1T=56,p1B=360;
+var p2L=570,p2R=920,p2T=56,p2B=360;
+var p1W=p1R-p1L,p1H=p1B-p1T;
+var p2W=p2R-p2L,p2H=p2B-p2T;
 
-// BLUE: Clinical capability (MAST Overall) — 18 matched models with dots
-const clin=[['2024-03-13',53.2,'Claude 3 Haiku'],['2024-10-29',55.6,'Claude Haiku 4.5'],['2025-03-25',60.6,'Gemini 2.5 Flash'],['2025-04-05',44.6,'Llama 4 Scout'],['2025-04-14',60.4,'GPT-4.1 mini'],['2025-06-01',33.1,'MedGemma 4B IT'],['2025-06-01',53.3,'MedGemma 27B IT'],['2025-08-07',67.6,'GPT-5 mini'],['2025-09-01',42.9,'MedGemma 1.5 4B IT'],['2025-09-29',62.6,'Claude Sonnet 4.5'],['2025-12-17',59.1,'Gemini 3 Flash'],['2026-01-15',61.8,'Kimi K2.5'],['2026-02-17',64.3,'Claude Sonnet 4.6'],['2026-03-17',60.0,'GPT-5.4 mini'],['2026-05-19',62.7,'Gemini 3.5 Flash'],['2026-06-30',61.4,'Claude Fable 5'],['2026-06-30',65.8,'Claude Sonnet 5'],['2026-07-21',65.9,'Gemini 3.6 Flash']];
+function toYr(d){var p=d.split('-');return +p[0]+(+p[1]-1)/12+(+p[2]||15)/365}
+function sx1(v){return p1L+((v-2024.0)/(2026.85-2024.0))*p1W}
+function sy1(v){return p1T+(1-v/80)*p1H}
+function sx2(v){return p2L+(v/15)*p2W}
+function sy2(v){return p2T+(1-v/100)*p2H}
 
-// RED: Safety (100 - MAST Severe_rate) — same 18 matched models with dots
-const saf=[['2024-10-29',79.4,'Claude Haiku 4.5'],['2025-03-25',85.8,'Gemini 2.5 Flash'],['2025-04-05',74.6,'Llama 4 Scout'],['2025-04-14',81.6,'GPT-4.1 mini'],['2025-06-01',75.4,'MedGemma 4B IT'],['2025-06-01',82.0,'MedGemma 27B IT'],['2025-08-07',86.0,'GPT-5 mini'],['2025-09-01',76.6,'MedGemma 1.5 4B IT'],['2025-09-29',80.0,'Claude Sonnet 4.5'],['2025-12-17',81.4,'Gemini 3 Flash'],['2026-01-15',82.7,'Kimi K2.5'],['2026-02-17',82.0,'Claude Sonnet 4.6'],['2026-03-17',80.8,'GPT-5.4 mini'],['2026-05-19',85.6,'Gemini 3.5 Flash'],['2026-06-30',83.7,'Claude Fable 5'],['2026-06-30',83.4,'Claude Sonnet 5'],['2026-07-01',90.3,'Muse Spark 1.1'],['2026-07-21',84.3,'Gemini 3.6 Flash']];
+var sev=[['2024-10-29',20.6,'Claude Haiku 4.5','S'],['2025-01-20',16.2,'DeepSeek R1','L'],['2025-03-25',14.2,'Gemini 2.5 Flash','M'],['2025-03-25',14.4,'Gemini 2.5 Pro','L'],['2025-04-05',25.4,'Llama 4 Maverick','L'],['2025-04-05',25.4,'Llama 4 Scout','S'],['2025-04-14',18.4,'GPT-4.1 mini','M'],['2025-04-14',18.4,'GPT-4.1','L'],['2025-06-01',18.0,'MedGemma 27B IT','S'],['2025-06-01',24.6,'MedGemma 4B IT','S'],['2025-08-07',14.0,'GPT-5 mini','M'],['2025-08-07',13.4,'GPT-5','L'],['2025-09-01',23.4,'MedGemma 1.5 4B IT','S'],['2025-09-29',20.2,'Claude Opus 4.5','L'],['2025-09-29',20.0,'Claude Sonnet 4.5','M'],['2025-12-11',13.6,'GPT-5.2','L'],['2025-12-17',18.6,'Gemini 3 Flash','M'],['2026-01-15',17.3,'Kimi K2.5','M'],['2026-02-17',18.2,'Claude Opus 4.6','L'],['2026-02-17',18.0,'Claude Sonnet 4.6','M'],['2026-02-19',17.8,'Gemini 3.1 Pro','L'],['2026-03-01',17.3,'GLM 5.1','L'],['2026-03-05',12.7,'GPT-5.4','L'],['2026-03-14',16.6,'Claude Opus 4.7','L'],['2026-03-17',19.2,'GPT-5.4 mini','M'],['2026-04-01',16.6,'Kimi K2.6','L'],['2026-04-23',10.5,'GPT-5.5','L'],['2026-05-01',20.2,'DeepSeek V4 Pro','L'],['2026-05-19',14.4,'Gemini 3.5 Flash','M'],['2026-05-22',17.6,'Claude Opus 4.8','L'],['2026-06-01',16.6,'Qwen3.5 397B A17B','L'],['2026-06-15',8.4,'Kimi K3','L'],['2026-06-30',16.3,'Claude Fable 5','M'],['2026-06-30',11.4,'Claude Opus 5','L'],['2026-06-30',16.6,'Claude Sonnet 5','M'],['2026-07-01',9.7,'Muse Spark 1.1','M'],['2026-07-09',10.4,'GPT-5.6 Sol','L'],['2026-07-15',22.4,'Grok 4.3','L'],['2026-07-21',15.7,'Gemini 3.6 Flash','M']];
+var omi_bench=[['2024-10-29',60.2,'Claude Haiku 4.5','S'],['2025-01-20',50.6,'DeepSeek R1','L'],['2025-03-25',44.7,'Gemini 2.5 Flash','M'],['2025-03-25',44.4,'Gemini 2.5 Pro','L'],['2025-04-05',75.8,'Llama 4 Maverick','L'],['2025-04-05',73.4,'Llama 4 Scout','S'],['2025-04-14',55.6,'GPT-4.1 mini','M'],['2025-04-14',56.0,'GPT-4.1','L'],['2025-06-01',53.5,'MedGemma 27B IT','S'],['2025-06-01',69.4,'MedGemma 4B IT','S'],['2025-08-07',39.5,'GPT-5 mini','M'],['2025-08-07',36.3,'GPT-5','L'],['2025-09-01',69.0,'MedGemma 1.5 4B IT','S'],['2025-09-29',51.0,'Claude Opus 4.5','L'],['2025-09-29',52.8,'Claude Sonnet 4.5','M'],['2025-12-11',39.1,'GPT-5.2','L'],['2025-12-17',46.8,'Gemini 3 Flash','M'],['2026-01-15',50.5,'Kimi K2.5','M'],['2026-02-17',50.0,'Claude Opus 4.6','L'],['2026-02-17',50.7,'Claude Sonnet 4.6','M'],['2026-02-19',44.9,'Gemini 3.1 Pro','L'],['2026-03-01',49.6,'GLM 5.1','L'],['2026-03-05',41.8,'GPT-5.4','L'],['2026-03-14',39.8,'Claude Opus 4.7','L'],['2026-03-17',53.6,'GPT-5.4 mini','M'],['2026-04-01',48.4,'Kimi K2.6','L'],['2026-04-23',36.4,'GPT-5.5','L'],['2026-05-01',56.4,'DeepSeek V4 Pro','L'],['2026-05-19',42.4,'Gemini 3.5 Flash','M'],['2026-05-22',46.7,'Claude Opus 4.8','L'],['2026-06-01',46.2,'Qwen3.5 397B A17B','L'],['2026-06-15',30.0,'Kimi K3','L'],['2026-06-30',41.8,'Claude Fable 5','M'],['2026-06-30',27.6,'Claude Opus 5','L'],['2026-06-30',46.9,'Claude Sonnet 5','M'],['2026-07-01',21.9,'Muse Spark 1.1','M'],['2026-07-09',36.0,'GPT-5.6 Sol','L'],['2026-07-15',63.4,'Grok 4.3','L'],['2026-07-21',42.6,'Gemini 3.6 Flash','M']];
+var visCurve=[[0,6.7],[1,50.0],[2,75.0],[3,87.5],[4,93.8],[5,96.9],[6,98.4],[7,99.2],[8,99.6],[9,99.8],[10,99.9],[11,100.0],[12,100.0],[13,100.0],[14,100.0],[15,100.0]];
+var omiCurve=[[0,0.02],[1,0.15],[2,0.31],[3,0.46],[4,0.62],[5,0.77],[6,0.93],[7,1.08],[8,1.23],[9,1.38],[10,1.54],[11,1.69],[12,1.84],[13,1.99],[14,2.15],[15,2.30]];
 
-function linFit(xs,ys){const n=xs.length,mx=xs.reduce((a,b)=>a+b,0)/n,my=ys.reduce((a,b)=>a+b,0)/n;let num=0,den=0;for(let i=0;i<n;i++){num+=(xs[i]-mx)*(ys[i]-my);den+=(xs[i]-mx)**2}return{m:num/den,b:my-(num/den)*mx}}
-function trend(xs,ys){const f=linFit(xs,ys),x0=Math.min(...xs),x1=Math.max(...xs),pts=[];for(let i=0;i<=100;i++){const x=x0+(x1-x0)*i/100;pts.push([sx(x),sy(Math.max(yMin,Math.min(yMax,f.m*x+f.b)))])}return{pts,f,endY:pts[pts.length-1][1]}}
+function linFit(xs,ys){var n=xs.length,mx=0,my=0;for(var i=0;i<n;i++){mx+=xs[i];my+=ys[i]}mx/=n;my/=n;var num=0,den=0;for(var i=0;i<n;i++){num+=(xs[i]-mx)*(ys[i]-my);den+=(xs[i]-mx)*(xs[i]-mx)}return{m:num/den,b:my-(num/den)*mx}}
+function mkTrend(data,sxFn,syFn,mn,mx){var xs=[],ys=[];for(var i=0;i<data.length;i++){xs.push(toYr(data[i][0]));ys.push(data[i][1])}var f=linFit(xs,ys),x0=Math.min.apply(null,xs),x1=Math.max.apply(null,xs),pts=[];for(var i=0;i<=60;i++){var x=x0+(x1-x0)*i/60;pts.push([sxFn(x),syFn(Math.max(mn,Math.min(mx,f.m*x+f.b)))])}return pts}
+function pathD(pts){var d='M';for(var i=0;i<pts.length;i++){d+=(i?'L':'')+pts[i][0]+','+pts[i][1]}return d}
+function dot(x,y,col,sz,tip){if(sz==='L')return'<circle cx="'+x+'" cy="'+y+'" r="3" fill="'+col+'" opacity="0.7" data-tip="'+tip+'"/>';if(sz==='M')return'<circle cx="'+x+'" cy="'+y+'" r="3" fill="none" stroke="'+col+'" stroke-width="1.3" opacity="0.75" data-tip="'+tip+'"/>';return'<rect x="'+(x-2)+'" y="'+(y-2)+'" width="4" height="4" fill="'+col+'" opacity="0.7" transform="rotate(45 '+x+' '+y+')" data-tip="'+tip+'"/>';}
 
-const gX=gen.map(r=>toYr(r[0])),gY=gen.map(r=>r[1]);
-const cX=clin.map(r=>toYr(r[0])),cY=clin.map(r=>r[1]);
-const sX=saf.map(r=>toYr(r[0])),sY=saf.map(r=>r[1]);
-const gT=trend(gX,gY),cT=trend(cX,cY),sT=trend(sX,sY);
+var omiTr=mkTrend(omi_bench,sx1,sy1,0,80);
+var sevTr=mkTrend(sev,sx1,sy1,0,80);
 
-let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
-[2024.5,2025,2025.5,2026,2026.5].forEach(yr=>{const x=sx(yr);s+=`<line x1="${x}" y1="${PAD.top}" x2="${x}" y2="${H-PAD.bottom}" stroke="#1e293b"/>`;if(Number.isInteger(yr))s+=`<text x="${x}" y="${H-PAD.bottom+18}" text-anchor="middle" fill="#64748b" font-size="11" font-family="Inter">${yr}</text>`});
-[20,40,60,80,100].forEach(v=>{const y=sy(v);s+=`<line x1="${PAD.left}" y1="${y}" x2="${W-PAD.right}" y2="${y}" stroke="#1e293b" stroke-width="0.5" opacity="0.4"/><text x="${PAD.left-8}" y="${y+4}" text-anchor="end" fill="#475569" font-size="9" font-family="Inter">${v}%</text>`});
-function pathD(pts){return'M'+pts.map(p=>p.join(',')).join('L')}
-// Green: trend line only, no dots
-s+=`<path d="${pathD(gT.pts)}" stroke="#22c55e" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-// Blue and red: trend lines
-s+=`<path d="${pathD(cT.pts)}" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-s+=`<path d="${pathD(sT.pts)}" stroke="#ef4444" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-// Blue and red: data points with tooltips
-clin.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#3b82f6" opacity="0.6"><title>${r[2]}: ${r[1]}% (MAST Overall)</title></circle>`});
-saf.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#ef4444" opacity="0.6"><title>${r[2]}: ${r[1]}% (100 − Severe rate)</title></circle>`});
-// Labels at end of each trend
-const gEndX=Math.max(...gX);
-s+=`<text x="${sx(gEndX)+8}" y="${gT.endY}" fill="#22c55e" font-size="11" font-weight="600" font-family="Inter">General</text>`;
-s+=`<text x="${sx(Math.max(...cX))+8}" y="${cT.endY}" fill="#3b82f6" font-size="11" font-weight="600" font-family="Inter">Clinical</text>`;
-s+=`<text x="${sx(Math.max(...sX))+8}" y="${sT.endY}" fill="#ef4444" font-size="11" font-weight="600" font-family="Inter">Safety</text>`;
-s+=`</svg>`;
+var s='<svg viewBox="0 0 '+W+' '+H+'">';
+s+='<rect width="'+W+'" height="'+H+'" fill="#fff" rx="0"/>';
+
+// === LEFT PANEL: Benchmark harm rates ===
+s+='<text x="'+p1L+'" y="'+(p1T-12)+'" fill="#5C7A80" font-size="12" font-weight="500" font-family="Inter">Benchmark harm rates</text>';
+s+='<text x="'+(p1R-2)+'" y="'+(p1T-12)+'" text-anchor="end" fill="#8BA0A5" font-size="10" font-family="Inter">DoNoHarm v2, 39 models</text>';
+
+// Left grid
+[2025,2026].forEach(function(yr){var x=sx1(yr);s+='<line x1="'+x+'" y1="'+p1T+'" x2="'+x+'" y2="'+p1B+'" stroke="#E2EEEF" stroke-dasharray="4 4"/>';s+='<text x="'+x+'" y="'+(p1B+16)+'" text-anchor="middle" fill="#5C7A80" font-size="10" font-family="Inter">'+yr+'</text>'});
+[0,20,40,60,80].forEach(function(v){var y=sy1(v);s+='<line x1="'+p1L+'" y1="'+y+'" x2="'+p1R+'" y2="'+y+'" stroke="#E2EEEF" stroke-dasharray="4 4"/>';if(v>0)s+='<text x="'+(p1L-8)+'" y="'+(y+4)+'" text-anchor="end" fill="#8BA0A5" font-size="9" font-family="Inter">'+v+'%</text>'});
+
+// Trend lines
+s+='<path d="'+pathD(omiTr)+'" stroke="#D97706" stroke-width="2" fill="none" opacity="0.45" stroke-linecap="round"/>';
+s+='<path d="'+pathD(sevTr)+'" stroke="#2563EB" stroke-width="2" fill="none" opacity="0.45" stroke-linecap="round"/>';
+
+// Dots
+omi_bench.forEach(function(r){s+=dot(sx1(toYr(r[0])),sy1(r[1]),'#D97706',r[3],r[2]+': omission '+r[1]+'%')});
+sev.forEach(function(r){s+=dot(sx1(toYr(r[0])),sy1(r[1]),'#2563EB',r[3],r[2]+': severe harm '+r[1]+'%')});
+
+// End labels
+s+='<text x="'+(p1R+6)+'" y="'+(omiTr[omiTr.length-1][1]+4)+'" fill="#D97706" font-size="11" font-weight="600" font-family="Inter">Omission</text>';
+s+='<text x="'+(p1R+6)+'" y="'+(sevTr[sevTr.length-1][1]+4)+'" fill="#2563EB" font-size="11" font-weight="600" font-family="Inter">Severe harm</text>';
+
+// Connector between panels
+s+='<line x1="'+(p1R+2)+'" y1="'+(p1T+p1H*0.35)+'" x2="'+(p2L-2)+'" y2="'+(p1T+p1H*0.35)+'" stroke="#C8D8DB" stroke-width="0.8" stroke-dasharray="3 3"/>';
+s+='<text x="'+((p1R+p2L)/2)+'" y="'+(p1T+p1H*0.35-8)+'" text-anchor="middle" fill="#8BA0A5" font-size="9" font-weight="500" font-family="Inter">if deployed</text>';
+s+='<text x="'+((p1R+p2L)/2)+'" y="'+(p1T+p1H*0.35+6)+'" text-anchor="middle" fill="#8BA0A5" font-size="9" font-weight="500" font-family="Inter">at scale →</text>';
+
+// === RIGHT PANEL: Detection probability ===
+s+='<text x="'+p2L+'" y="'+(p2T-12)+'" fill="#5C7A80" font-size="12" font-weight="500" font-family="Inter">Would surveillance detect it?</text>';
+s+='<text x="'+(p2R+20)+'" y="'+(p2T-12)+'" text-anchor="end" fill="#8BA0A5" font-size="10" font-family="Inter">Monte Carlo, 10K iterations</text>';
+
+// Right grid
+[5,10,15].forEach(function(yr){var x=sx2(yr);s+='<line x1="'+x+'" y1="'+p2T+'" x2="'+x+'" y2="'+p2B+'" stroke="#E2EEEF" stroke-dasharray="4 4"/>';s+='<text x="'+x+'" y="'+(p2B+16)+'" text-anchor="middle" fill="#5C7A80" font-size="10" font-family="Inter">'+yr+' yrs</text>'});
+[0,25,50,75,100].forEach(function(v){var y=sy2(v);s+='<line x1="'+p2L+'" y1="'+y+'" x2="'+p2R+'" y2="'+y+'" stroke="#E2EEEF" stroke-dasharray="4 4"/>';s+='<text x="'+(p2L-8)+'" y="'+(y+4)+'" text-anchor="end" fill="#8BA0A5" font-size="9" font-family="Inter">'+v+'%</text>'});
+
+// Gap shading between curves
+var gapPath='M'+sx2(0)+','+sy2(visCurve[0][1]);
+for(var i=1;i<visCurve.length;i++){gapPath+='L'+sx2(visCurve[i][0])+','+sy2(visCurve[i][1])}
+for(var i=omiCurve.length-1;i>=0;i--){gapPath+='L'+sx2(omiCurve[i][0])+','+sy2(omiCurve[i][1])}
+gapPath+='Z';
+s+='<path d="'+gapPath+'" fill="#E2EEEF" opacity="0.5"/>';
+
+// Commission curve (blue)
+var vP='M';visCurve.forEach(function(p,i){vP+=(i?'L':'')+sx2(p[0])+','+sy2(p[1])});
+s+='<path d="'+vP+'" stroke="#2563EB" stroke-width="2.5" fill="none" opacity="0.8" stroke-linecap="round"/>';
+
+// Omission curve (amber)
+var oP='M';omiCurve.forEach(function(p,i){oP+=(i?'L':'')+sx2(p[0])+','+sy2(p[1])});
+s+='<path d="'+oP+'" stroke="#D97706" stroke-width="2.5" fill="none" opacity="0.8" stroke-linecap="round"/>';
+
+// Year 4 marker
+var cx=sx2(4);
+s+='<line x1="'+cx+'" y1="'+(p2T+4)+'" x2="'+cx+'" y2="'+(p2B-4)+'" stroke="#A8BEC2" stroke-width="0.8" stroke-dasharray="4 3"/>';
+s+='<circle cx="'+cx+'" cy="'+sy2(93.8)+'" r="5" fill="none" stroke="#2563EB" stroke-width="2" data-tip="Commission: 93.8% detected by year 4"/>';
+s+='<circle cx="'+cx+'" cy="'+sy2(0.62)+'" r="5" fill="none" stroke="#D97706" stroke-width="2" data-tip="Omission: 0.6% detected by year 4"/>';
+s+='<text x="'+(cx+8)+'" y="'+(sy2(93.8)-6)+'" fill="#2563EB" font-size="13" font-weight="700" font-family="Inter">93.8%</text>';
+s+='<text x="'+(cx+8)+'" y="'+(sy2(0.62)+14)+'" fill="#D97706" font-size="13" font-weight="700" font-family="Inter">0.6%</text>';
+
+// Cerivastatin callout
+var bx=sx2(7),by=sy2(68);
+s+='<rect x="'+bx+'" y="'+by+'" width="155" height="60" fill="#F7FAFA" stroke="#C8D8DB" rx="8"/>';
+s+='<text x="'+(bx+12)+'" y="'+(by+18)+'" fill="#0F1B1E" font-size="12" font-weight="700" font-family="Inter">Cerivastatin (Baycol)</text>';
+s+='<text x="'+(bx+12)+'" y="'+(by+33)+'" fill="#5C7A80" font-size="10" font-family="Inter">Same 0.1% harm rate.</text>';
+s+='<text x="'+(bx+12)+'" y="'+(by+47)+'" fill="#2563EB" font-size="10" font-weight="600" font-family="Inter">Caught by year 4. Same system.</text>';
+s+='<line x1="'+bx+'" y1="'+(by+30)+'" x2="'+(cx+6)+'" y2="'+sy2(93.8)+'" stroke="#C8D8DB" stroke-width="0.8"/>';
+
+// End labels
+s+='<text x="'+(p2R+6)+'" y="'+(sy2(100)+5)+'" fill="#2563EB" font-size="11" font-weight="600" font-family="Inter">Commission</text>';
+s+='<text x="'+(p2R+6)+'" y="'+(sy2(2.3)+5)+'" fill="#D97706" font-size="11" font-weight="600" font-family="Inter">Omission</text>';
+
+// Legend
+var ly=H-14;
+s+='<circle cx="'+p1L+'" cy="'+ly+'" r="3" fill="#5C7A80" opacity="0.7"/><text x="'+(p1L+8)+'" y="'+(ly+4)+'" fill="#5C7A80" font-size="10" font-family="Inter">Large</text>';
+s+='<circle cx="'+(p1L+55)+'" cy="'+ly+'" r="3" fill="none" stroke="#5C7A80" stroke-width="1.2"/><text x="'+(p1L+63)+'" y="'+(ly+4)+'" fill="#5C7A80" font-size="10" font-family="Inter">Medium</text>';
+s+='<rect x="'+(p1L+122)+'" y="'+(ly-3)+'" width="5" height="5" fill="#5C7A80" opacity="0.7" transform="rotate(45 '+(p1L+124)+' '+ly+')"/><text x="'+(p1L+132)+'" y="'+(ly+4)+'" fill="#5C7A80" font-size="10" font-family="Inter">Small</text>';
+s+='<text x="'+(p1L+195)+'" y="'+(ly+4)+'" fill="#8BA0A5" font-size="10" font-family="Inter">·  80%+ of severe errors are omissions (NOHARM)</text>';
+
+s+='</svg>';
 el.innerHTML=s;
 })();
 
-// === FIGURE 3: Family Rows ===
+// === FIGURE 4: READINESS WHEEL ===
 (function(){
-const el=document.getElementById('f3-chart');
-const dims=['Diagnosis','Management','Safety','Images','Radiology','Agentic'];
-const families=[
-  {lab:'OpenAI',c:'#10a37f',models:[
-    ['GPT-4',[55,50,45,30,35,20]],['GPT-4o',[68,62,58,40,45,30]],['o1',[72,68,58,35,38,28]],
-    ['o3',[73,70,60,38,42,38]],['GPT-5',[76,74,72,45,55,50]],['GPT-5.5',[75,76,74,43,58,57]],['GPT-5.6 Sol',[78,78,75,46,60,58]]
-  ]},
-  {lab:'Anthropic',c:'#d4764e',models:[
-    ['Claude 3 Opus',[65,60,55,35,40,25]],['Claude 3.5',[70,65,60,38,42,35]],
-    ['Claude Opus 4.5',[72,66,68,40,50,38]],['Claude Opus 4.7',[75,69,71,43,55,41]]
-  ]},
-  {lab:'Google',c:'#4285f4',models:[
-    ['Gemini 1.5 Pro',[60,55,50,42,48,28]],['Gemini 2.5 Pro',[70,66,62,45,52,35]],
-    ['Gemini 3 Pro',[74,70,66,48,58,42]],['Gemini 3.5 Flash',[72,57,64,50,62,19]],['MedGemma 27B',[45,41,33,16,58,0]]
-  ]},
-  {lab:'DeepSeek',c:'#60a5fa',models:[
-    ['DeepSeek R1',[66,64,56,32,40,32]],['DeepSeek V4 Pro',[70,68,52,38,44,36]]
-  ]},
-  {lab:'Meta',c:'#a855f7',models:[
-    ['Llama 3.1 70B',[42,38,30,20,25,15]],['Llama 4 Maverick',[52,48,35,28,32,22]]
-  ]},
+var el=document.getElementById('f4-chart');
+var D=[
+  {q:'Patient-Facing',s:'Triage',sc:3,sub:'b',ev:'Epic, Babylon deployed. Not FDA cleared.'},
+  {q:'Patient-Facing',s:'Symptom Checking',sc:3,sub:'a',ev:'Ada Health CE marked. Not FDA.'},
+  {q:'Patient-Facing',s:'Health Education',sc:2,sub:'',ev:'Prospective RCTs. No product.'},
+  {q:'Patient-Facing',s:'Shared Decisions',sc:0,sub:'',ev:'No evidence or product.'},
+  {q:'Clinical Reasoning',s:'Differential Dx',sc:3,sub:'b',ev:'Glass Health, OpenEvidence. CDS exempt.'},
+  {q:'Clinical Reasoning',s:'Treatment Planning',sc:4,sub:'',ev:'7 FDA-cleared devices.'},
+  {q:'Clinical Reasoning',s:'Image Interpretation',sc:5,sub:'',ev:'1,218 FDA devices. MASAI trial.'},
+  {q:'Clinical Reasoning',s:'Prescribing',sc:3,sub:'b',ev:'Epic CDS at 85% of customers. No FDA.'},
+  {q:'Administrative',s:'Documentation',sc:3,sub:'b',ev:'DAX ~600K clinicians. No FDA.'},
+  {q:'Administrative',s:'Clinical Coding',sc:3,sub:'b',ev:'Epic Penny, 3M AI. No reg pathway.'},
+  {q:'Administrative',s:'Referral Processing',sc:1,sub:'',ev:'Retrospective only.'},
+  {q:'Administrative',s:'Scheduling',sc:2,sub:'',ev:'Prospective studies. No outcomes.'},
+  {q:'System & Governance',s:'Quality Monitoring',sc:2,sub:'',ev:'Prospective studies.'},
+  {q:'System & Governance',s:'Population Health',sc:2,sub:'',ev:'Risk stratification deployed.'},
+  {q:'System & Governance',s:'Audit',sc:0,sub:'',ev:'No evidence or product.'},
+  {q:'System & Governance',s:'Resource Allocation',sc:4,sub:'',ev:'5 FDA-cleared devices.'}
 ];
-const R=44,gap=14,rowH=R*2+56,labelW=100;
-const maxCols=Math.max(...families.map(f=>f.models.length));
-const keyR=54;
-const svgW=labelW+maxCols*(R*2+gap)+keyR*2+70;
-const svgH=families.length*rowH+50;
-function hp(cx,cy,i,r){const a=(i*60-90)*Math.PI/180;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]}
+var QC={'Patient-Facing':'#0D9488','Clinical Reasoning':'#0891B2','Administrative':'#4F46E5','System & Governance':'#7C3AED'};
+var SL=['No evidence','Retrospective','Prospective','Deployed (unregulated)','FDA cleared','Post-market outcomes'];
+var QN=Object.keys(QC);
+var AMB='#D97706';
 
-let s=`<svg viewBox="0 0 ${svgW} ${svgH}" xmlns="http://www.w3.org/2000/svg">`;
-s+=`<text x="${labelW+maxCols*(R*2+gap)/2}" y="16" text-anchor="middle" fill="#475569" font-size="9" font-style="italic" font-family="Inter">Estimated scores for illustration \u2014 5 models have verified MAST data</text>`;
+var html='<div class="wheel-layout">';
 
-// Domain key radar on the right
-const keyX=labelW+maxCols*(R*2+gap)+keyR+20;
-const keyY=rowH*1.5;
-for(const f of [.5,1]){const pts=Array.from({length:6},(_,i)=>hp(keyX,keyY,i,keyR*f).join(',')).join(' ');s+=`<polygon points="${pts}" fill="none" stroke="rgba(255,255,255,${f===1?.12:.05})" stroke-width="${f===1?1:.5}"/>`}
-for(let i=0;i<6;i++){const[x2,y2]=hp(keyX,keyY,i,keyR);s+=`<line x1="${keyX}" y1="${keyY}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,.06)" stroke-width="0.5"/>`;const[lx,ly]=hp(keyX,keyY,i,keyR+14);s+=`<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="central" fill="#94a3b8" font-size="9" font-weight="600" font-family="Inter">${dims[i]}</text>`}
-s+=`<text x="${keyX}" y="${keyY+keyR+30}" text-anchor="middle" fill="#64748b" font-size="8" font-weight="500" font-family="Inter">DOMAIN KEY</text>`;
-
-families.forEach((fam,fi)=>{
-  const baseY=40+fi*rowH+R+10;
-  s+=`<text x="8" y="${baseY-4}" fill="${fam.c}" font-size="13" font-weight="700" font-family="Inter">${fam.lab}</text>`;
-  s+=`<line x1="${labelW}" y1="${baseY+R+14}" x2="${labelW+fam.models.length*(R*2+gap)-gap}" y2="${baseY+R+14}" stroke="#1e293b" stroke-width="0.5"/>`;
-  s+=`<text x="${labelW}" y="${baseY+R+24}" fill="#334155" font-size="7" font-family="Inter">\u2190 earlier</text>`;
-  s+=`<text x="${labelW+fam.models.length*(R*2+gap)-gap}" y="${baseY+R+24}" text-anchor="end" fill="#334155" font-size="7" font-family="Inter">later \u2192</text>`;
-
-  fam.models.forEach((m,mi)=>{
-    const cx=labelW+mi*(R*2+gap)+R;
-    const cy=baseY;
-    const color=fam.c;
-    for(const f of [.25,.5,.75,1]){const pts=Array.from({length:6},(_,i)=>hp(cx,cy,i,R*f).join(',')).join(' ');s+=`<polygon points="${pts}" fill="none" stroke="rgba(255,255,255,${f===1?.08:.03})" stroke-width="${f===1?'0.7':'0.4'}"/>`}
-    for(let i=0;i<6;i++){const[x2,y2]=hp(cx,cy,i,R);s+=`<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,.03)" stroke-width="0.4"/>`}
-    const scores=m[1].map(v=>v||0);
-    const pts=scores.map((v,i)=>hp(cx,cy,i,R*(v/100)).join(',')).join(' ');
-    s+=`<polygon points="${pts}" fill="${color}" opacity="0.2" stroke="${color}" stroke-width="1.5" stroke-opacity="0.8"/>`;
-    s+=`<text x="${cx}" y="${cy+R+24}" text-anchor="middle" fill="#e2e8f0" font-size="9" font-weight="600" font-family="Inter">${m[0]}</text>`;
-  });
-});
-s+=`</svg>`;
-el.innerHTML=s;
-})();
-
-// === FIGURE 4: Readiness Wheel with side labels ===
-(function(){
-const el=document.getElementById('f4-chart');
-const D=[
-  {q:'Patient-Facing',s:'Triage',sc:2,ev:'NHS 111 AI triage; Babylon Health data'},
-  {q:'Patient-Facing',s:'Symptom Checking',sc:1,ev:'Ada Health accuracy studies'},
-  {q:'Patient-Facing',s:'Health Education',sc:1,ev:'Chatbot satisfaction studies only'},
-  {q:'Patient-Facing',s:'Shared Decisions',sc:0,ev:'No published evidence'},
-  {q:'Clinical Reasoning',s:'Differential Dx',sc:1,ev:'MAST Dx 72\u201375%; no prospective outcomes'},
-  {q:'Clinical Reasoning',s:'Treatment Planning',sc:1,ev:'MAST Mgmt data; Watson Oncology abandoned'},
-  {q:'Clinical Reasoning',s:'Image Interpretation',sc:3,ev:'IDx-DR, Paige AI \u2014 FDA cleared'},
-  {q:'Clinical Reasoning',s:'Prescribing',sc:1,ev:'CDSS literature; 90% alert dismissal'},
-  {q:'Administrative',s:'Documentation',sc:2,ev:'DAX Copilot prospective; physician satisfaction'},
-  {q:'Administrative',s:'Clinical Coding',sc:2,ev:'Multiple accuracy studies; some deployment'},
-  {q:'Administrative',s:'Referral Processing',sc:0,ev:'No published evidence'},
-  {q:'Administrative',s:'Scheduling',sc:1,ev:'Operational studies only'},
-  {q:'System & Governance',s:'Quality Monitoring',sc:1,ev:'Surveillance tools; sparse validation'},
-  {q:'System & Governance',s:'Population Health',sc:2,ev:'Risk stratification deployed (Epic, Optum)'},
-  {q:'System & Governance',s:'Audit',sc:0,ev:'No published evidence'},
-  {q:'System & Governance',s:'Resource Allocation',sc:1,ev:'Predictive models; limited outcome data'},
-];
-const QC={'Patient-Facing':'#0f766e','Clinical Reasoning':'#0e7490','Administrative':'#4f46e5','System & Governance':'#7c3aed'};
-const SL=['Nothing exists','In development','Tested in practice','Regulatory pathway','Deployed with evidence'];
-const QN=Object.keys(QC);
-
-// Build HTML layout: left labels | wheel | right labels
-let html='<div style="display:flex;align-items:center;gap:0;max-width:960px;width:100%">';
-
-// Left column (System & Governance at top, Admin below — matches wheel position)
-html+='<div style="width:200px;flex-shrink:0;text-align:right;padding-right:16px">';
-[3,2].forEach(qi=>{
-  html+=`<div style="font-size:9px;font-weight:700;color:${QC[QN[qi]]};letter-spacing:0.8px;text-transform:uppercase;margin:16px 0 4px">${QN[qi]}</div>`;
-  for(let si=0;si<4;si++){
-    const d=D[qi*4+si];
-    const dots='\u25cf'.repeat(d.sc)+'\u25cb'.repeat(4-d.sc);
-    html+=`<div style="font-size:11px;color:#cbd5e1;padding:3px 0;display:flex;align-items:center;gap:6px;justify-content:flex-end"><span style="font-weight:500">${d.s}</span><span style="font-size:9px;letter-spacing:1px;color:${QC[d.q]}">${dots}</span></div>`;
+// Left column (System & Governance, Administrative)
+html+='<div class="wheel-col wheel-col-left">';
+[3,2].forEach(function(qi){
+  html+='<div class="wheel-quad" style="color:'+QC[QN[qi]]+'">'+QN[qi]+'</div>';
+  for(var si=0;si<4;si++){
+    var d=D[qi*4+si];
+    var dots='';
+    for(var r=1;r<=5;r++){
+      if(r<=d.sc){
+        var dotCol=(d.sub==='b'&&r===3)?AMB:QC[d.q];
+        dots+='<span style="color:'+dotCol+';">●</span>';
+      }else{
+        dots+='<span style="color:#C8D8DB;">○</span>';
+      }
+    }
+    html+='<div class="wheel-item wheel-item-left"><span class="lbl">'+d.s+'</span><span class="dots">'+dots+'</span></div>';
   }
 });
 html+='</div>';
 
 // Wheel SVG
-const wR=180,iR=34,mR=wR-6;
-const gD=4,sD=(360-4*gD)/16;
-const svgS=wR*2+20;
-function pc(deg,r){const a=(deg-90)*Math.PI/180;return[wR+10+r*Math.cos(a),wR+10+r*Math.sin(a)]}
-function ap(a1,a2,oR,ir){const c=wR+10;const p1=pc(a1,oR),p2=pc(a2,oR),p3=pc(a2,ir),p4=pc(a1,ir);return`M${p1[0]},${p1[1]}A${oR},${oR} 0 0 1 ${p2[0]},${p2[1]}L${p3[0]},${p3[1]}A${ir},${ir} 0 0 0 ${p4[0]},${p4[1]}Z`}
-function hexCol(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
+var wR=180,iR=22,mR=wR-6;
+var gD=4,sD=(360-4*gD)/16;
+var svgS=wR*2+20;
+function pc(deg,r){var a=(deg-90)*Math.PI/180;return[wR+10+r*Math.cos(a),wR+10+r*Math.sin(a)]}
+function ap(a1,a2,oR,ir){var p1=pc(a1,oR),p2=pc(a2,oR),p3=pc(a2,ir),p4=pc(a1,ir);return'M'+p1[0]+','+p1[1]+'A'+oR+','+oR+' 0 0 1 '+p2[0]+','+p2[1]+'L'+p3[0]+','+p3[1]+'A'+ir+','+ir+' 0 0 0 '+p4[0]+','+p4[1]+'Z'}
 
-let ws=`<svg viewBox="0 0 ${svgS} ${svgS}" style="width:100%;max-width:380px;flex:1">`;
-[1,2,3,4].forEach(n=>{const r=iR+(n/4)*(mR-iR);ws+=`<circle cx="${wR+10}" cy="${wR+10}" r="${r}" fill="none" stroke="#1e293b" stroke-width="0.8"/>`});
-ws+=`<circle cx="${wR+10}" cy="${wR+10}" r="${iR}" fill="#1e293b" stroke="#334155"/>`;
-
-D.forEach((d,i)=>{
-  const qi=Math.floor(i/4),si=i%4,qs=qi*(4*sD+gD),a1=qs+si*sD,a2=qs+(si+1)*sD;
-  const oR=d.sc===0?iR+5:iR+(d.sc/4)*(mR-iR);
-  const c=QC[d.q];
-  const al=d.sc===0?0.06:0.15+(d.sc/4)*0.78;
-  ws+=`<path d="${ap(a1,a2,mR,iR)}" fill="${c}" opacity="0.02" stroke="${c}" stroke-width="0.3" stroke-opacity="0.05"/>`;
-  ws+=`<path d="${ap(a1,a2,oR,iR)}" fill="${c}" opacity="${al}" stroke="${c}" stroke-width="0.6" stroke-opacity="0.4"><title>${d.s}: ${SL[d.sc]}\n${d.ev}</title></path>`;
+var ws='<svg viewBox="0 0 '+svgS+' '+svgS+'" style="width:100%;max-width:380px;flex:1">';
+[1,2,3,4,5].forEach(function(n){
+  var r=iR+(n/5)*(mR-iR);
+  ws+='<circle cx="'+(wR+10)+'" cy="'+(wR+10)+'" r="'+r+'" fill="none" stroke="#E2EEEF" stroke-width="0.5"/>';
 });
-// Quadrant labels on wheel
-QN.forEach((name,qi)=>{
-  const qs=qi*(4*sD+gD),mid=qs+2*sD;const[lx,ly]=pc(mid,mR+14);let rot=mid;if(mid>90&&mid<270)rot+=180;
-  ws+=`<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="central" fill="${QC[name]}" font-size="7" font-weight="700" font-family="Inter" letter-spacing="1" transform="rotate(${rot},${lx},${ly})">${name.toUpperCase()}</text>`;
-});
-ws+=`</svg>`;
-html+=`<div style="flex:1;display:flex;justify-content:center">${ws}</div>`;
+ws+='<circle cx="'+(wR+10)+'" cy="'+(wR+10)+'" r="'+iR+'" fill="#F7FAFA" stroke="#C8D8DB"/>';
 
-// Right column (Patient + Clinical)
-html+='<div style="width:200px;flex-shrink:0;padding-left:16px">';
-[0,1].forEach(qi=>{
-  html+=`<div style="font-size:9px;font-weight:700;color:${QC[QN[qi]]};letter-spacing:0.8px;text-transform:uppercase;margin:16px 0 4px">${QN[qi]}</div>`;
-  for(let si=0;si<4;si++){
-    const d=D[qi*4+si];
-    const dots='\u25cf'.repeat(d.sc)+'\u25cb'.repeat(4-d.sc);
-    html+=`<div style="font-size:11px;color:#cbd5e1;padding:3px 0;display:flex;align-items:center;gap:6px"><span style="font-size:9px;letter-spacing:1px;color:${QC[d.q]}">${dots}</span><span style="font-weight:500">${d.s}</span></div>`;
+D.forEach(function(d,i){
+  var qi=Math.floor(i/4),si=i%4,qs=qi*(4*sD+gD),a1=qs+si*sD,a2=qs+(si+1)*sD;
+  var oR=d.sc===0?iR+5:iR+(d.sc/5)*(mR-iR);
+  var c=QC[d.q];
+  var al=d.sc===0?0.04:0.12+(d.sc/5)*0.65;
+
+  ws+='<path d="'+ap(a1,a2,mR,iR)+'" fill="'+c+'" opacity="0.03" stroke="'+c+'" stroke-width="0.3" stroke-opacity="0.06"/>';
+  ws+='<path d="'+ap(a1,a2,oR,iR)+'" fill="'+c+'" opacity="'+al+'" stroke="'+c+'" stroke-width="0.5" stroke-opacity="0.3" data-tip="'+d.s+': '+SL[d.sc]+'&#10;'+d.ev+'"/>';
+});
+
+QN.forEach(function(name,qi){
+  var qs=qi*(4*sD+gD),mid=qs+2*sD;var lxy=pc(mid,mR+14);var rot=mid;if(mid>90&&mid<270)rot+=180;
+  ws+='<text x="'+lxy[0]+'" y="'+lxy[1]+'" text-anchor="middle" dominant-baseline="central" fill="'+QC[name]+'" font-size="7" font-weight="700" font-family="Inter" letter-spacing="1" transform="rotate('+rot+','+lxy[0]+','+lxy[1]+')">'+name.toUpperCase()+'</text>';
+});
+ws+='</svg>';
+html+='<div class="wheel-center">'+ws+'</div>';
+
+// Right column (Patient-Facing, Clinical Reasoning)
+html+='<div class="wheel-col wheel-col-right">';
+[0,1].forEach(function(qi){
+  html+='<div class="wheel-quad" style="color:'+QC[QN[qi]]+'">'+QN[qi]+'</div>';
+  for(var si=0;si<4;si++){
+    var d=D[qi*4+si];
+    var dots='';
+    for(var r=1;r<=5;r++){
+      if(r<=d.sc){
+        var dotCol=(d.sub==='b'&&r===3)?AMB:QC[d.q];
+        dots+='<span style="color:'+dotCol+';">●</span>';
+      }else{
+        dots+='<span style="color:#C8D8DB;">○</span>';
+      }
+    }
+    html+='<div class="wheel-item"><span class="dots">'+dots+'</span><span class="lbl">'+d.s+'</span></div>';
   }
 });
 html+='</div></div>';
 
-// Scale bar below — diagonal split swatches showing multiple quadrant colours
-html+='<div style="display:flex;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap">';
-const qCols=['#0f766e','#0e7490','#4f46e5','#7c3aed'];
-SL.forEach((label,i)=>{
-  const al=i===0?0.08:0.15+(i/4)*0.78;
-  const c1=`rgba(15,118,110,${al})`;
-  const c2=`rgba(79,70,229,${al})`;
-  const bg=i===0?`background:#0f172a;border:1px solid #334155`:`background:linear-gradient(135deg,${c1} 50%,${c2} 50%)`;
-  html+=`<div style="display:flex;align-items:center;gap:6px;font-size:10px;color:#94a3b8"><div style="width:14px;height:14px;border-radius:3px;${bg}"></div>${i} \u2014 ${label}</div>`;
+// Legend
+html+='<div class="wheel-legend">';
+var legItems=[
+  ['#C8D8DB','0 No evidence'],
+  ['#8BA0A5','1 Retrospective'],
+  ['#4F46E5','2 Prospective'],
+  ['#D97706','3 Deployed (unregulated)'],
+  ['#059669','4 FDA cleared'],
+  ['#047857','5 Post-market outcomes']
+];
+legItems.forEach(function(item){
+  html+='<div class="wheel-legend-item"><div class="wheel-legend-swatch" style="background:'+item[0]+';opacity:0.85"></div>'+item[1]+'</div>';
 });
 html+='</div>';
 
 el.innerHTML=html;
-el.style.flexDirection='column';
 })();
 
-// === SAFETY FIGURES ===
-
-const D = {
- tiers:[{n:'Imaging and diagnostic devices',s:'FDA-cleared and identifiable in the data',d:688,r:218,x:'one death recorded'},
-        {n:'Clinical decision support',s:'Sepsis alerting. Device status disputed by the vendor',d:1,r:32,x:'all filed voluntarily'},
-        {n:'Generative AI and LLMs',s:'The technology actually being proposed',d:0,r:0,x:'no reporting mechanism exists'}],
- funnel:[{l:'FDA AI-Enabled Device List',v:1524,c:'#3b82f6'},
-         {l:'On codes where AI is the majority',v:688,c:'#3b82f6',n:'836 excluded as unfindable'},
-         {l:'Adverse event filings',v:747,c:'#8b5cf6'},
-         {l:'Distinct defects (duplicates collapsed)',v:'~479',c:'#8b5cf6'},
-         {l:'Excluding physical products',v:218,c:'#f59e0b'},
-         {l:'Describe a wrong clinical answer',v:149,c:'#ef4444',n:'136 from one company'}],
- hf:{total:139,others:79,self:118,both:11,cust:7,unclear:3,fn:108,mal:127,inj:12},
- rec:[{q:'"During the course of this investigation, Cerner was also informed of a patient death. Cerner was not provided the details."',
-       s:'Cerner sepsis alerting',f:'MALFUNCTION',w:'a death, in the text only'},
-      {q:'"As part of HeartFlow\u2019s internal review, we identified a potential false negative." Repeated 108 times.',
-       s:'HeartFlow FFR-CT',f:'MALFUNCTION \u00d7127',w:'missed arterial narrowing'},
-      {q:'"...may impact the clinician\u2019s care and result in delay of referral to a dermatologist." Nine identical filings.',
-       s:'DermaSensor',f:'MALFUNCTION \u00d711',w:'one defect, eleven filings'},
-      {q:'"It burnt my arm twice, with no response or advise about solutions from the manufacturer."',
-       s:'Whoop band, filed under a sleep apnoea AI code',f:'INJURY',w:'nothing to do with AI'}],
- appr:{2016:18,2017:27,2018:65,2019:80,2020:114,2021:130,2022:162,2023:226,2024:235,2025:333,2026:92},
- codeReports:[139,32,11,10,5,5,4,3,2,2,1,1,1,1,1,1,1],
- trials:{coh:[[2022,2,1,0],[2023,10,4,0],[2024,30,13,0],[2025,65,20,0],[2026,35,1,1]]},
- reg:[{n:'OECD AIM',s:'Automated media monitor, Beta',h:1057,d:null,c:'#8b5cf6'},
-      {n:'AIAAIC',s:'Manually curated incidents',h:219,d:25,dl:'25 flagged device-related, most are not devices',c:'#8b5cf6'},
-      {n:'AI Incident Database',s:'Manually curated incidents',h:162,d:1,dl:'1 regulated device, in the whole database',c:'#8b5cf6'},
-      {n:'FDA MAUDE, AI codes',s:'Regulatory adverse event reports',h:218,d:218,dl:'every record is a device, and 218 is the national total',c:'#3b82f6'}],
- chains:{'0-1':38,'2-3':44,'4-5':25,'6-9':21,'10+':12},
- lit:{y:[2020,2021,2022,2023,2024,2025],all:[2436,3884,5058,6950,10477,17977],saf:[129,191,257,373,731,1534]}
+// === SHARED DATA (Figures 5-7) ===
+var D={
+  appr:{2016:18,2017:27,2018:65,2019:80,2020:114,2021:130,2022:162,2023:226,2024:235,2025:333,2026:92},
+  codeReports:[139,32,11,10,5,5,4,3,2,2,1,1,1,1,1,1,1],
+  trials:{coh:[[2022,2,1,0],[2023,10,4,0],[2024,30,13,0],[2025,65,20,0]]},
+  lit:{y:[2020,2021,2022,2023,2024,2025],all:[2436,3884,5058,6950,10477,17977],saf:[129,191,257,373,731,1534]}
 };
 
-function txt(x,y,t,o){o=o||{};return '<text x="'+x+'" y="'+y+'" font-size="'+(o.s||12)+'" fill="'+(o.f||'#94a3b8')+
- '" text-anchor="'+(o.a||'start')+'" font-weight="'+(o.w||400)+'" font-family="Inter"'+(o.st?' letter-spacing="'+o.st+'"':'')+'>'+t+'</text>'}
-function rect(x,y,w,h,f,o){o=o||{};return '<rect x="'+x+'" y="'+y+'" width="'+Math.max(0,w)+'" height="'+Math.max(0,h)+
- '" fill="'+f+'" rx="'+(o.r==null?3:o.r)+'"'+(o.o?' opacity="'+o.o+'"':'')+
- (o.sd?' stroke="'+o.sd+'" stroke-width="1" stroke-dasharray="4 3"':'')+'/>'}
+// === CHART HELPERS (Figures 5-8) ===
+function txt(x,y,t,o){o=o||{};return'<text x="'+x+'" y="'+y+'" font-size="'+(o.s||13)+'" fill="'+(o.f||'#5C7A80')+'" text-anchor="'+(o.a||'start')+'" font-weight="'+(o.w||400)+'" font-family="Inter"'+(o.st?' letter-spacing="'+o.st+'"':'')+'>'+t+'</text>'}
+function rect(x,y,w,h,f,o){o=o||{};return'<rect x="'+x+'" y="'+y+'" width="'+Math.max(0,w)+'" height="'+Math.max(0,h)+'" fill="'+f+'" rx="'+(o.r==null?4:o.r)+'"'+(o.o?' opacity="'+o.o+'"':'')+
+(o.sd?' stroke="'+o.sd+'" stroke-width="1" stroke-dasharray="4 3"':'')+'/>'}
+function nudge(ys,gap){var items=ys.map(function(y,i){return{y:y,i:i}});items.sort(function(a,b){return a.y-b.y});for(var j=1;j<items.length;j++){if(items[j].y-items[j-1].y<gap)items[j].y=items[j-1].y+gap}var out=[];items.forEach(function(it){out[it.i]=it.y});return out}
 
-function f1(){var s=txt(60,34,'Safety evidence by technology tier',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'Adverse event reports held by the FDA, for each kind of clinical AI',{s:11.5,f:'#64748b'});
- var y0=100,rh=98,L=330,W=420,mx=232;
- D.tiers.forEach(function(t,i){var y=y0+i*rh;
-  s+=txt(L-18,y+16,t.n,{s:12.5,f:'#e2e8f0',a:'end',w:600});
-  s+=txt(L-18,y+33,t.s,{s:9.5,f:'#475569',a:'end'});
-  s+=txt(L-18,y+50,t.d?t.d+' device'+(t.d>1?'s':''):'no identifiable devices',{s:9.5,f:'#334155',a:'end'});
-  var w=t.r/mx*W;
-  if(t.r>0){s+=rect(L,y+4,w,34,i===0?'#3b82f6':'#8b5cf6',{o:.85});
-   s+=txt(L+w+12,y+27,t.r+' reports',{s:13,f:'#e2e8f0',w:700});
-   s+=txt(L,y+52,t.x,{s:9.5,f:'#64748b'});}
-  else{s+=rect(L,y+4,W,34,'none',{sd:'#475569'});
-   s+=txt(L+18,y+27,'ZERO',{s:14,f:'#ef4444',w:800,st:2});
-   s+=txt(L+100,y+27,t.x,{s:10.5,f:'#64748b'});}
-  if(i<2)s+='<line x1="60" y1="'+(y+rh-16)+'" x2="840" y2="'+(y+rh-16)+'" stroke="#1e293b"/>';});
- s+='<line x1="60" y1="384" x2="840" y2="384" stroke="#1e293b"/>';
- s+=txt(60,406,'Meanwhile: 456 LLM trials registered \u00b7 148 completed \u00b7 106 of those report no findings anywhere',{s:11.5,f:'#f59e0b',w:600});
- document.getElementById('s1').innerHTML=s;}
+// === FIGURE 5: APPROVAL VS SILENCE ===
+function sf5(){
+var s='<rect width="900" height="430" fill="#fff" rx="0"/>';
+s+=txt(60,34,'Authorisation accelerates. The record stays empty.',{s:18,f:'#0F1B1E',w:700});
+s+=txt(60,54,'FDA AI device authorisations per year, against reports held by each AI product code',{s:12,f:'#5C7A80'});
+var P={l:60,r:60,t:96,b:246},W=900,ys=Object.keys(D.appr),mx=360,xw=(W-P.l-P.r)/ys.length;
+ys.forEach(function(y,i){var v=D.appr[y],h=v/mx*(P.b-P.t),x=P.l+i*xw+xw*.2;
+  s+=rect(x,P.b-h,xw*.6,h,y==='2026'?'#A8BEC2':'#2563EB',{o:.85});
+  s+=txt(x+xw*.3,P.b-h-7,v,{s:10,f:'#2563EB',a:'middle',w:600});
+  s+=txt(x+xw*.3,P.b+16,y.slice(2),{s:10,f:'#5C7A80',a:'middle'});
+});
+s+=txt(P.l,P.t-10,'AI devices authorised per year',{s:11,f:'#2563EB',w:600});
+var by=300,bh=74,n=66,bw=(W-P.l-P.r)/n,bmx=139;
+s+=txt(P.l,by-12,'Every one of the 66 AI product codes, ranked by reports ever received',{s:12,f:'#0F1B1E',w:600});
+for(var i=0;i<n;i++){var v=D.codeReports[i]||0,h=v?Math.max(2,Math.sqrt(v/bmx)*bh):1.5;
+  s+=rect(P.l+i*bw,by+bh-h,bw-1.2,h,v?'#DC2626':'#E2EEEF',{r:1});}
+s+=txt(P.l,by+bh+20,'17 codes with any report at all',{s:11,f:'#DC2626',w:600});
+s+=txt(W-P.r,by+bh+20,'49 codes have never received one',{s:11,f:'#8BA0A5',a:'end',w:600});
+s+=txt(P.l,by+bh+44,'QIH carries 274 AI devices and has 10 reports · PIB, autonomous retinopathy screening, 7 devices and 1 report',{s:12,f:'#92400E',w:600});
+document.getElementById('sv5').innerHTML=s;
+}
 
-function f2(){var s=txt(60,34,'From the FDA\u2019s list to a usable number',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'Each step is a stated decision, not a filter chosen after seeing the answer',{s:11.5,f:'#64748b'});
- var y0=92,rh=56,L=340,W=360,mx=1524;
- D.funnel.forEach(function(f,i){var y=y0+i*rh,w=Math.max(3,f.v/mx*W);
-  s+=txt(L-16,y+22,f.l,{s:11.5,f:'#e2e8f0',a:'end',w:500});
-  s+=rect(L,y+4,w,30,f.c,{o:.85});
-  s+=txt(L+w+12,y+26,f.v.toLocaleString(),{s:14,f:'#f8fafc',w:700});
-  if(f.n)s+=txt(L+w+12+String(f.v).length*10+26,y+26,f.n,{s:10,f:'#64748b'});
-  if(i<D.funnel.length-1)s+='<line x1="'+(L+4)+'" y1="'+(y+34)+'" x2="'+(L+4)+'" y2="'+(y+rh+4)+'" stroke="#334155" stroke-dasharray="2 3"/>';});
- s+='<line x1="60" y1="408" x2="840" y2="408" stroke="#1e293b"/>';
- s+=txt(60,430,'836 of the 1,524 devices, 55%, sit on shared codes and cannot be separated from conventional equipment',{s:11.5,f:'#f59e0b',w:600});
- document.getElementById('s2').innerHTML=s;}
+// === FIGURE 6: TRIALS VS RESULTS ===
+function sf6(){
+var s='<rect width="900" height="400" fill="#fff" rx="0"/>';
+s+=txt(60,34,'Most completed trials never report anything',{s:18,f:'#0F1B1E',w:700});
+s+=txt(60,54,'Each bar is the trials that completed that year. The solid portion is how many of those have reported.',{s:12,f:'#5C7A80'});
+var P={l:60,r:250,t:104,b:292},C=D.trials.coh,mx=72,xw=(900-P.l-P.r)/C.length;
+C.forEach(function(c,i){var n=c[1],rep=c[2],cen=c[3],
+  h=n/mx*(P.b-P.t),hr=rep/mx*(P.b-P.t),x=P.l+i*xw+xw*.2,w=xw*.6;
+  s+=rect(x,P.b-h,w,h,'#E2EEEF');
+  if(cen)s+=rect(x,P.b-h,w,h,'none',{sd:'#A8BEC2'});
+  s+=rect(x,P.b-hr,w,Math.max(2,hr),cen?'#A8BEC2':'#2563EB');
+  s+=txt(x+w/2,P.b-h-8,'n='+n,{s:10,f:'#5C7A80',a:'middle'});
+  s+=txt(x+w/2,P.b+18,c[0],{s:11,f:'#5C7A80',a:'middle'});
+  if(cen)s+=txt(x+w/2,P.b+32,'too recent',{s:9,f:'#0F1B1E',a:'middle',w:500});
+});
+var pts=C.map(function(c,i){return[P.l+i*xw+xw*.5,P.b-(c[2]/c[1])*280]});
+s+='<polyline points="'+pts.map(function(p){return p.join(',')}).join(' ')+'" fill="none" stroke="#D97706" stroke-width="2.2"/>';
+pts.forEach(function(p,i){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="'+(C[i][3]?'#A8BEC2':'#D97706')+'"/>'});
+var lY6=nudge(pts.map(function(p){return p[1]-13}),14);
+pts.forEach(function(p,i){
+  s+=txt(p[0],lY6[i],Math.round(100*C[i][2]/C[i][1])+'%',{s:10,f:C[i][3]?'#A8BEC2':'#D97706',a:'middle',w:600});
+});
+s+=txt(P.l,P.b+56,'Year the trial completed. This is the clock that matters: reporting only becomes possible once a trial ends.',{s:11,f:'#5C7A80'});
+var RX=670;
+[['456','trials registered','#0F1B1E',22],['148','completed','#3D5A60',22],
+  ['39','have reported findings','#3D5A60',22],['69','have reported nothing','#DC2626',30]].forEach(function(r,i){
+  var y=116+i*52;s+=txt(RX,y,r[0],{s:r[3],f:r[2],w:800});s+=txt(RX,y+18,r[1],{s:11,f:'#5C7A80',w:500});
+});
+s+='<line x1="'+RX+'" y1="332" x2="860" y2="332" stroke="#C8D8DB"/>';
+s+=txt(RX,352,'Of 108 trials completing 2020–2025',{s:11,f:'#5C7A80'});
+s+=txt(RX,372,'roughly two in three produce',{s:12,f:'#92400E',w:600});
+s+=txt(RX,388,'nothing anyone can find.',{s:12,f:'#92400E',w:600});
+document.getElementById('sv6').innerHTML=s;
+}
 
-function f3(){var h=D.hf,s=txt(60,34,'One company accounts for almost the entire record',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'Adverse event reports across every FDA-cleared AI device that can be identified',{s:11.5,f:'#64748b'});
- var L=260,W=440,mx=148;
- [['HeartFlow FFR-CT',h.total,'#ef4444'],['All 687 other AI devices',h.others,'#334155']].forEach(function(r,i){
-  var y=100+i*62,w=r[1]/mx*W;
-  s+=txt(L-16,y+24,r[0],{s:12,f:'#e2e8f0',a:'end',w:600});
-  s+=rect(L,y,w,34,r[2]);s+=txt(L+w+12,y+24,r[1],{s:15,f:'#f8fafc',w:700});});
- s+=txt(L,238,'64% of everything, from a single product',{s:11.5,f:'#ef4444',w:600});
- s+='<line x1="60" y1="262" x2="840" y2="262" stroke="#1e293b"/>';
- s+=txt(60,288,'How HeartFlow\u2019s 139 reports came to be filed',{s:12.5,f:'#e2e8f0',w:600});
- var seg=[['Found by HeartFlow\u2019s own internal review',h.self,'#ef4444'],
-          ['Both internal and customer',h.both,'#f59e0b'],
-          ['Raised by a customer or clinician',h.cust,'#3b82f6'],
-          ['Unclear',h.unclear,'#334155']],x=60,TW=780;
- seg.forEach(function(g){var w=g[1]/h.total*TW;s+=rect(x,304,w-2,26,g[2]);
-  if(w>44)s+=txt(x+w/2,321,g[1],{s:11,f:'#ffffff',a:'middle',w:700});x+=w;});
- seg.forEach(function(g,i){var cx=60+(i%2)*400,ly=356+Math.floor(i/2)*20;
-  s+=rect(cx,ly-9,10,10,g[2],{r:2});
-  s+=txt(cx+16,ly,g[0]+' \u2014 '+Math.round(100*g[1]/h.total)+'%',{s:10.5,f:'#94a3b8'});});
- s+=txt(60,414,h.fn+' of the 139 say \u201cfalse negative\u201d in the text. '+h.mal+' of 139 are filed as a malfunction, not an injury.',
-  {s:11.5,f:'#f59e0b',w:600});
- document.getElementById('s3').innerHTML=s;}
+// === FIGURE 7: RESEARCH VS SAFETY ===
+function sf7(){
+var l=D.lit,s='<rect width="900" height="400" fill="#fff" rx="0"/>';
+s+=txt(60,34,'The field grows faster than the study of its risks',{s:18,f:'#0F1B1E',w:700});
+s+=txt(60,54,'PubMed publications on clinical AI, and the share also indexed for safety or harm',{s:12,f:'#5C7A80'});
+var P={l:60,r:140,t:100,b:296},mx=19500,xw=(900-P.l-P.r)/l.y.length;
+l.y.forEach(function(y,i){var h=l.all[i]/mx*(P.b-P.t),hs=l.saf[i]/mx*(P.b-P.t),x=P.l+i*xw+xw*.2;
+  s+=rect(x,P.b-h,xw*.6,h,'#E2EEEF');
+  s+=rect(x,P.b-hs,xw*.6,Math.max(2,hs),'#DC2626');
+  if(h>30)s+=txt(x+xw*.3,P.b-h+16,l.all[i].toLocaleString(),{s:10,f:'#8BA0A5',a:'middle'});
+  else s+=txt(x+xw*.3,P.b-h-8,l.all[i].toLocaleString(),{s:10,f:'#5C7A80',a:'middle'});
+  s+=txt(x+xw*.3,P.b+18,y,{s:10,f:'#5C7A80',a:'middle'});
+});
+var pts=l.y.map(function(y,i){return[P.l+i*xw+xw*.5,P.b-(l.saf[i]/l.all[i])*1400]});
+s+='<polyline points="'+pts.map(function(p){return p.join(',')}).join(' ')+'" fill="none" stroke="#D97706" stroke-width="2.5"/>';
+pts.forEach(function(p,i){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="#D97706"/>'});
+var lY7=nudge(pts.map(function(p){return p[1]-13}),14);
+pts.forEach(function(p,i){
+  s+=txt(p[0],lY7[i],(100*l.saf[i]/l.all[i]).toFixed(1)+'%',{s:10,f:'#D97706',a:'middle',w:600});
+});
+s+=rect(790,112,12,12,'#E2EEEF',{r:2});s+=txt(808,122,'All clinical AI',{s:11,f:'#5C7A80'});
+s+=rect(790,134,12,12,'#DC2626',{r:2});s+=txt(808,144,'Safety indexed',{s:11,f:'#5C7A80'});
+s+='<line x1="790" y1="162" x2="802" y2="162" stroke="#D97706" stroke-width="2.2"/>';
+s+=txt(808,166,'Safety share',{s:11,f:'#D97706'});
+s+=txt(60,340,'Safety papers grew from 129 to 1,534. Their share of the field rose from 5.3% to 8.5%.',{s:12,f:'#1E3A3F',w:600});
+s+=txt(60,364,'More than nine papers in ten are still about what these systems can do, not how they fail.',{s:12,f:'#92400E',w:600});
+document.getElementById('sv7').innerHTML=s;
+}
 
-function f4(){var s=txt(60,34,'What the record actually says',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'Verbatim narrative text, against the category it was filed under',{s:11.5,f:'#64748b'});
- D.rec.forEach(function(r,i){var y=86+i*94;
-  s+=rect(60,y,780,80,'#1e293b',{o:.5,r:8});
-  s+=rect(60,y,3,80,i===3?'#334155':'#ef4444',{r:0});
-  var words=r.q.split(' '),line='',lines=[];
-  words.forEach(function(w){if((line+w).length>72){lines.push(line);line=w+' '}else line+=w+' '});
-  lines.push(line);
-  lines.slice(0,3).forEach(function(ln,j){s+=txt(78,y+22+j*15,ln.trim(),{s:10.5,f:'#cbd5e1'})});
-  s+=txt(78,y+70,r.s,{s:10,f:'#64748b',w:600});
-  s+=txt(826,y+22,r.f,{s:10.5,f:i===3?'#64748b':'#ef4444',a:'end',w:700,st:.5});
-  s+=txt(826,y+70,r.w,{s:9.5,f:'#475569',a:'end'});});
- s+=txt(60,466,'Across the 218 relevant reports: 196 malfunction \u00b7 20 injury \u00b7 1 death \u00b7 1 unclassified',{s:11.5,f:'#f59e0b',w:600});
- document.getElementById('s4').innerHTML=s;}
+// === FIGURE 8: REVEALED PREFERENCE (Sankey) ===
+function sfRP(){
+var W=1100,H=500,done=document.getElementById('svRP').childNodes.length>0;
+if(done)return;
+var C1='#2563EB',C2='#059669',C3='#EA580C',ND='#A8BEC2',ND2='#C8D8DB';
 
-function sf5(){var s=txt(60,34,'Authorisation accelerates. The record stays empty.',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'FDA AI device authorisations per year, against reports held by each AI product code',{s:11.5,f:'#64748b'});
- var P={l:60,r:60,t:96,b:246},W=900,ys=Object.keys(D.appr),mx=360,xw=(W-P.l-P.r)/ys.length;
- ys.forEach(function(y,i){var v=D.appr[y],h=v/mx*(P.b-P.t),x=P.l+i*xw+xw*.2;
-  s+=rect(x,P.b-h,xw*.6,h,y==='2026'?'#334155':'#3b82f6',{o:.85});
-  s+=txt(x+xw*.3,P.b-h-7,v,{s:10,f:'#93c5fd',a:'middle',w:600});
-  s+=txt(x+xw*.3,P.b+16,y.slice(2),{s:10,f:'#475569',a:'middle'});});
- s+=txt(P.l,P.t-10,'AI devices authorised per year',{s:10.5,f:'#93c5fd',w:600});
- var by=300,bh=74,n=66,bw=(W-P.l-P.r)/n,bmx=139;
- s+=txt(P.l,by-12,'Every one of the 66 AI product codes, ranked by reports ever received',{s:11,f:'#e2e8f0',w:600});
- for(var i=0;i<n;i++){var v=D.codeReports[i]||0,h=v?Math.max(2,Math.sqrt(v/bmx)*bh):1.5;
-  s+=rect(P.l+i*bw,by+bh-h,bw-1.2,h,v?'#ef4444':'#1e293b',{r:1});}
- s+=txt(P.l,by+bh+20,'17 codes with any report at all',{s:10,f:'#ef4444',w:600});
- s+=txt(W-P.r,by+bh+20,'49 codes have never received one',{s:10,f:'#64748b',a:'end',w:600});
- s+=txt(P.l,by+bh+44,'QIH carries 274 AI devices and has 10 reports \u00b7 PIB, autonomous retinopathy screening, 7 devices and 1 report',
-  {s:11.5,f:'#f59e0b',w:600});
- document.getElementById('sv5').innerHTML=s;}
+function stC(v){if(v===0)return'#991B1B';if(v<=15)return'#DC2626';if(v<=30)return'#D97706';if(v<=50)return'#B45309';return'#059669'}
 
-function sf6(){var s=txt(60,34,'Most completed trials never report anything',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'Each bar is the trials that completed that year. The solid portion is how many of those have reported.',{s:11.5,f:'#64748b'});
- var P={l:60,r:250,t:104,b:292},C=D.trials.coh,mx=72,xw=(900-P.l-P.r)/C.length;
- C.forEach(function(c,i){var n=c[1],rep=c[2],cen=c[3],
-   h=n/mx*(P.b-P.t),hr=rep/mx*(P.b-P.t),x=P.l+i*xw+xw*.2,w=xw*.6;
-  s+=rect(x,P.b-h,w,h,'#1e293b');
-  if(cen)s+=rect(x,P.b-h,w,h,'none',{sd:'#334155'});
-  s+=rect(x,P.b-hr,w,Math.max(2,hr),cen?'#64748b':'#3b82f6');
-  s+=txt(x+w/2,P.b-h-8,'n='+n,{s:10,f:'#64748b',a:'middle'});
-  s+=txt(x+w/2,P.b+18,c[0],{s:10.5,f:'#475569',a:'middle'});
-  if(cen)s+=txt(x+w/2,P.b+32,'too recent',{s:8.5,f:'#334155',a:'middle'});});
- var pts=C.map(function(c,i){return [P.l+i*xw+xw*.5,P.b-(c[2]/c[1])*160]});
- s+='<polyline points="'+pts.map(function(p){return p.join(',')}).join(' ')+'" fill="none" stroke="#f59e0b" stroke-width="2.2"/>';
- pts.forEach(function(p,i){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="'+(C[i][3]?'#64748b':'#f59e0b')+'"/>';
-  s+=txt(p[0],p[1]-11,Math.round(100*C[i][2]/C[i][1])+'%',{s:9.5,f:C[i][3]?'#64748b':'#f59e0b',a:'middle',w:600});});
- s+=txt(P.l,P.b+56,'Year the trial completed. This is the clock that matters: reporting only becomes possible once a trial ends.',{s:10,f:'#475569'});
- var RX=670;
- [['456','trials registered','#e2e8f0',22],['148','completed','#94a3b8',22],
-  ['39','have reported findings','#94a3b8',22],['69','have reported nothing','#ef4444',30]].forEach(function(r,i){
-  var y=116+i*52;s+=txt(RX,y,r[0],{s:r[3],f:r[2],w:800});s+=txt(RX,y+18,r[1],{s:10,f:'#475569',w:500});});
- s+='<line x1="'+RX+'" y1="332" x2="860" y2="332" stroke="#1e293b"/>';
- s+=txt(RX,352,'Of 108 trials completing 2020-2025',{s:10,f:'#64748b'});
- s+=txt(RX,372,'roughly two in three produce',{s:11,f:'#f59e0b',w:600});
- s+=txt(RX,388,'nothing anyone can find.',{s:11,f:'#f59e0b',w:600});
- document.getElementById('sv6').innerHTML=s;}
+var snodes=[
+  {name:'Regulatory Clearance',meta:'1,524 FDA AI/ML devices',color:C1},
+  {name:'Market Size',meta:'$9.2B across 5 sectors',color:C2},
+  {name:'Clinical Trial R&D',meta:'178 GenAI oncology trials',color:C3},
+  {name:'Diagnostic Imaging',color:ND},
+  {name:'Clinical Decision Support',color:ND},
+  {name:'Patient Engagement',color:ND},
+  {name:'Screening & Triage',color:ND},
+  {name:'Clinical Documentation',color:ND2},
+  {name:'Other Specialties',color:ND2}
+];
+var slinks=[
+  {source:0,target:3,value:81.5,pct:'82%',sc:C1},
+  {source:0,target:8,value:17.3,pct:'17%',sc:C1},
+  {source:0,target:4,value:0.5,pct:'',sc:C1},
+  {source:0,target:6,value:0.7,pct:'',sc:C1},
+  {source:1,target:4,value:43.1,pct:'43%',sc:C2},
+  {source:1,target:3,value:18.0,pct:'18%',sc:C2},
+  {source:1,target:5,value:16.3,pct:'16%',sc:C2},
+  {source:1,target:7,value:15.8,pct:'16%',sc:C2},
+  {source:1,target:6,value:6.8,pct:'7%',sc:C2},
+  {source:2,target:3,value:37.1,pct:'37%',sc:C3},
+  {source:2,target:4,value:22.5,pct:'23%',sc:C3},
+  {source:2,target:5,value:19.1,pct:'19%',sc:C3},
+  {source:2,target:6,value:12.4,pct:'12%',sc:C3},
+  {source:2,target:8,value:6.2,pct:'6%',sc:C3},
+  {source:2,target:7,value:2.8,pct:'3%',sc:C3}
+];
 
-function f9(){var s=txt(60,34,'Four registries, and none of them records clinical AI harm',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'Health-sector records held by each source, and how many concern a regulated medical device',{s:11.5,f:'#64748b'});
- var L=250,W=430,mx=1100,y0=100,rh=72;
- D.reg.forEach(function(r,i){var y=y0+i*rh,w=r.h/mx*W;
-  s+=txt(L-16,y+16,r.n,{s:12,f:'#e2e8f0',a:'end',w:600});
-  s+=txt(L-16,y+32,r.s,{s:9.5,f:'#475569',a:'end'});
-  s+=rect(L,y+2,w,26,r.c,{o:.45});
-  s+=txt(L+w+10,y+20,r.h.toLocaleString()+' health records',{s:11.5,f:'#cbd5e1',w:600});
-  if(r.d===null){s+=txt(L,y+46,'device share not verifiable, it counts news coverage',{s:9.5,f:'#64748b'});}
-  else{var wd=Math.max(2,r.d/mx*W);
-   s+=rect(L,y+32,wd,10,r.c);
-   s+=txt(L+wd+8,y+41,r.dl,{s:10,f:r.d===218?'#93c5fd':'#ef4444',w:600});}
-  if(i<3)s+='<line x1="60" y1="'+(y+rh-14)+'" x2="840" y2="'+(y+rh-14)+'" stroke="#1e293b"/>';});
- s+='<line x1="60" y1="392" x2="840" y2="392" stroke="#1e293b"/>';
- s+=txt(60,414,'The registries hold 1,438 health records between them, and almost none concern a regulated clinical AI device.',{s:11.5,f:'#f59e0b',w:600});
- s+=txt(60,434,'The FDA is the only source that does. It holds 218, and 91% of those describing a wrong answer come from one company.',{s:11,f:'#64748b'});
- document.getElementById('s9').innerHTML=s;}
+var layout=d3.sankey().nodeWidth(12).nodePadding(14).nodeSort(null)
+  .extent([[155,80],[430,H-20]]);
+var graph=layout({
+  nodes:snodes.map(function(n){return Object.assign({},n)}),
+  links:slinks.map(function(l){return Object.assign({},l)})
+});
+var linkP=d3.sankeyLinkHorizontal();
 
-function f7(){var s=txt(60,34,'Safety claims are inherited from older devices',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'How far back the predicate chain reaches, for 140 AI device clearances',{s:11.5,f:'#64748b'});
- var P={l:130,t:110,b:296},ks=Object.keys(D.chains),mx=50,xw=(900-P.l-130)/ks.length;
- ks.forEach(function(k,i){var v=D.chains[k],h=v/mx*(P.b-P.t),x=P.l+i*xw+xw*.18;
-  s+=rect(x,P.b-h,xw*.64,h,k==='10+'?'#ef4444':'#8b5cf6',{o:.85});
-  s+=txt(x+xw*.32,P.b-h-8,v,{s:12,f:'#e2e8f0',a:'middle',w:700});
-  s+=txt(x+xw*.32,P.b+18,k+' yrs',{s:10.5,f:'#475569',a:'middle'});});
- s+=txt(P.l,P.t-14,'Number of device clearances',{s:10,f:'#64748b'});
- s+=txt(60,340,'Median chain 3 years \u00b7 longest 21 years \u00b7 9% rest on a device cleared a decade or more earlier',{s:11.5,f:'#e2e8f0',w:600});
- s+=txt(60,362,'81% cite at least one AI predicate. 19% cite none, so the comparator was conventional software.',{s:11,f:'#64748b'});
- s+=txt(60,384,'A device cleared in 2026 can rest on one cleared in 2005, before modern machine learning existed.',{s:11.5,f:'#f59e0b',w:600});
- document.getElementById('s7').innerHTML=s;}
+var s='<rect width="'+W+'" height="'+H+'" fill="#fff" rx="0"/>';
+s+=txt(40,28,'Where the Field Bets — and How Ready Those Bets Are',{s:17,f:'#0F1B1E',w:700});
+s+=txt(40,46,'Three signals of revealed preference converge on five clinical AI use cases. None exceeds 45% evidence readiness.',{s:11,f:'#5C7A80'});
+s+=txt(40,70,'REVEALED PREFERENCE',{s:9,f:'#3D5A60',w:700,st:1.5});
+s+=txt(660,70,'EVIDENCE READINESS',{s:9,f:'#3D5A60',w:700,st:1.5});
+s+='<line x1="630" y1="62" x2="630" y2="'+(H-16)+'" stroke="#E2EEEF"/>';
 
-function sf7(){var l=D.lit,s=txt(60,34,'The field grows faster than the study of its risks',{s:16,f:'#f8fafc',w:700});
- s+=txt(60,54,'PubMed publications on clinical AI, and the share also indexed for safety or harm',{s:11.5,f:'#64748b'});
- var P={l:60,r:140,t:100,b:296},mx=19500,xw=(900-P.l-P.r)/l.y.length;
- l.y.forEach(function(y,i){var h=l.all[i]/mx*(P.b-P.t),hs=l.saf[i]/mx*(P.b-P.t),x=P.l+i*xw+xw*.2;
-  s+=rect(x,P.b-h,xw*.6,h,'#1e293b');
-  s+=rect(x,P.b-hs,xw*.6,Math.max(2,hs),'#ef4444');
-  s+=txt(x+xw*.3,P.b-h-8,l.all[i].toLocaleString(),{s:10,f:'#64748b',a:'middle'});
-  s+=txt(x+xw*.3,P.b+18,y,{s:10,f:'#475569',a:'middle'});});
- var pts=l.y.map(function(y,i){return [P.l+i*xw+xw*.5,P.b-(l.saf[i]/l.all[i])*1600]});
- s+='<polyline points="'+pts.map(function(p){return p.join(',')}).join(' ')+'" fill="none" stroke="#f59e0b" stroke-width="2.2"/>';
- pts.forEach(function(p,i){s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="#f59e0b"/>';
-  s+=txt(p[0],p[1]-11,(100*l.saf[i]/l.all[i]).toFixed(1)+'%',{s:9.5,f:'#f59e0b',a:'middle',w:600});});
- s+=rect(790,112,10,10,'#1e293b',{r:2});s+=txt(806,121,'All clinical AI',{s:10,f:'#64748b'});
- s+=rect(790,134,10,10,'#ef4444',{r:2});s+=txt(806,143,'Safety indexed',{s:10,f:'#94a3b8'});
- s+='<line x1="790" y1="160" x2="800" y2="160" stroke="#f59e0b" stroke-width="2.2"/>';
- s+=txt(806,164,'Safety share',{s:10,f:'#f59e0b'});
- s+=txt(60,340,'Safety papers grew from 129 to 1,534. Their share of the field rose from 5.3% to 8.5%.',{s:11.5,f:'#e2e8f0',w:600});
- s+=txt(60,364,'More than nine papers in ten are still about what these systems can do, not how they fail.',{s:11.5,f:'#f59e0b',w:600});
- document.getElementById('sv7').innerHTML=s;}
+graph.links.forEach(function(l){
+  s+='<path d="'+linkP(l)+'" fill="none" stroke="'+l.sc+'" stroke-opacity="0.22" stroke-width="'+Math.max(2,l.width)+'"/>';
+});
+graph.nodes.forEach(function(n){
+  s+=rect(n.x0,n.y0,n.x1-n.x0,Math.max(3,n.y1-n.y0),n.color,{r:3});
+});
+
+graph.nodes.filter(function(n){return n.meta}).forEach(function(n){
+  var cy=(n.y0+n.y1)/2;
+  s+=txt(n.x0-8,cy-4,n.name,{s:11,f:n.color,a:'end',w:600});
+  s+=txt(n.x0-8,cy+10,n.meta,{s:9,f:'#8BA0A5',a:'end'});
+});
+graph.nodes.filter(function(n){return!n.meta}).forEach(function(n){
+  var cy=(n.y0+n.y1)/2;
+  s+=txt(n.x1+8,cy+4,n.name,{s:11,f:'#3D5A60',w:500});
+});
+
+graph.links.forEach(function(l){
+  if(!l.pct)return;
+  var mx=(l.source.x1+l.target.x0)/2,my=(l.y0+l.y1)/2;
+  s+=txt(mx,my+4,l.pct,{s:9,f:l.sc,a:'middle',w:600});
+});
+
+var uc=[
+  {name:'Diagnostic Imaging',n:66,real:34,comp:37,safety:10,outcome:34,r:29},
+  {name:'Clinical Decision Support',n:40,real:52,comp:67,safety:32,outcome:22,r:43},
+  {name:'Patient Engagement',n:34,real:11,comp:50,safety:14,outcome:64,r:35},
+  {name:'Screening & Triage',n:22,real:22,comp:36,safety:13,outcome:18,r:22},
+  {name:'Clinical Documentation',n:5,real:80,comp:0,safety:20,outcome:20,r:30}
+];
+var RX=660,BX=815,BW=220,RH=74;
+var mL=['Real patients','Comparator','Safety','Outcomes'];
+var mK=['real','comp','safety','outcome'];
+
+s+=txt(RX,84,'% of trials meeting four evaluation criteria',{s:10,f:'#5C7A80'});
+
+uc.forEach(function(u,i){
+  var y=96+i*RH;
+  s+=txt(RX,y+12,u.name,{s:12,f:'#0F1B1E',w:600});
+  s+=txt(RX,y+26,'n = '+u.n+' trials',{s:9,f:'#8BA0A5'});
+  s+=rect(BX,y+4,BW,14,'#E2EEEF',{r:4});
+  var bw=Math.max(4,(u.r/100)*BW);
+  s+=rect(BX,y+4,bw,14,stC(u.r),{o:0.85,r:4});
+  s+=txt(BX+bw+8,y+15,u.r+'%',{s:12,f:stC(u.r),w:700});
+
+  mK.forEach(function(k,mi){
+    var my=y+24+mi*12,val=u[k],mw=Math.max(1,(val/100)*BW);
+    s+=rect(BX,my,mw,5,stC(val),{r:2,o:0.6});
+    s+=txt(BX-4,my+5,mL[mi],{s:8,f:'#8BA0A5',a:'end'});
+    s+=txt(BX+mw+4,my+5,val+'%',{s:8,f:val===0?'#DC2626':'#5C7A80',w:val===0?600:400});
+  });
+  if(i<uc.length-1)s+='<line x1="'+RX+'" y1="'+(y+RH-2)+'" x2="'+(BX+BW)+'" y2="'+(y+RH-2)+'" stroke="#E2EEEF"/>';
+});
+
+var ly=H-12;
+s+=rect(40,ly-6,14,3,C1,{r:1});s+=txt(58,ly,'FDA clearances (1,524)',{s:9,f:'#5C7A80'});
+s+=rect(220,ly-6,14,3,C2,{r:1});s+=txt(238,ly,'Market size ($9.2B)',{s:9,f:'#5C7A80'});
+s+=rect(380,ly-6,14,3,C3,{r:1});s+=txt(398,ly,'GenAI oncology trials (178)',{s:9,f:'#5C7A80'});
+
+document.getElementById('svRP').innerHTML=s;
+}
 
 
+// === FIGURE 9: THE SCRIBE GAP — ZOOM INTO THE VOID ===
 
-function tog(id){document.getElementById(id).classList.toggle('show')}
+// === THE SCRIBE GAP ===
+function sfTP(){
+if(document.getElementById('svTP').childNodes.length>0)return;
+var W=900,H=430;
+var s='<svg viewBox="0 0 '+W+' '+H+'">';
+s+='<rect width="'+W+'" height="'+H+'" fill="#fff"/>';
 
+var tasks=[
+  {name:'Treatment advice',auto:0,aug:100},
+  {name:'Prevention counselling',auto:0,aug:87.9},
+  {name:'Medication dispensing',auto:16.7,aug:69.2},
+  {name:'Interpret patient histories',auto:31.7,aug:66.9},
+  {name:'Diagnostic analysis',auto:32.5,aug:55.0}
+];
+var baseline={name:'All AI tasks (baseline)',auto:49.1,aug:47.0};
+
+var CX=430,RH=50,pT=50,pxPer=3.4;
+var LBL=200;
+
+// Axis headers
+s+='<text x="'+(CX-80)+'" y="24" text-anchor="end" fill="#DC2626" font-size="11" font-weight="600" font-family="Inter" letter-spacing="0.5">← AUTOMATION</text>';
+s+='<text x="'+(CX-80)+'" y="38" text-anchor="end" fill="#8BA0A5" font-size="9" font-family="Inter">AI performs the task</text>';
+s+='<text x="'+(CX+80)+'" y="24" fill="#059669" font-size="11" font-weight="600" font-family="Inter" letter-spacing="0.5">AUGMENTATION →</text>';
+s+='<text x="'+(CX+80)+'" y="38" fill="#8BA0A5" font-size="9" font-family="Inter">AI assists a human</text>';
+
+// Center axis
+var chartBot=pT+tasks.length*RH+RH+26;
+s+='<line x1="'+CX+'" y1="'+pT+'" x2="'+CX+'" y2="'+chartBot+'" stroke="#C8D8DB" stroke-width="1.5"/>';
+
+// Grid
+[20,40,60,80,100].forEach(function(v){
+  var xl=CX-v*pxPer,xr=CX+v*pxPer;
+  s+='<line x1="'+xl+'" y1="'+pT+'" x2="'+xl+'" y2="'+chartBot+'" stroke="#E2EEEF" stroke-dasharray="4 4"/>';
+  s+='<line x1="'+xr+'" y1="'+pT+'" x2="'+xr+'" y2="'+chartBot+'" stroke="#E2EEEF" stroke-dasharray="4 4"/>';
+  if(v%20===0){
+    s+='<text x="'+xl+'" y="'+(pT-6)+'" text-anchor="middle" fill="#A8BEC2" font-size="9" font-family="Inter">'+v+'%</text>';
+    s+='<text x="'+xr+'" y="'+(pT-6)+'" text-anchor="middle" fill="#A8BEC2" font-size="9" font-family="Inter">'+v+'%</text>';
+  }
+});
+
+// Task rows
+tasks.forEach(function(t,i){
+  var cy=pT+i*RH+RH/2;
+  if(i%2===0)s+='<rect x="0" y="'+(cy-RH/2)+'" width="'+W+'" height="'+RH+'" fill="#F7FAFA"/>';
+
+  // Label
+  s+='<text x="'+(LBL-6)+'" y="'+(cy+5)+'" text-anchor="end" fill="#0F1B1E" font-size="11" font-weight="500" font-family="Inter">'+t.name+'</text>';
+
+  // Automation bar (left)
+  if(t.auto>0){
+    var aw=t.auto*pxPer;
+    s+='<rect x="'+(CX-aw)+'" y="'+(cy-10)+'" width="'+aw+'" height="20" fill="#DC2626" opacity="0.75" rx="3" data-tip="Automation: '+t.auto+'%"/>';
+    s+='<text x="'+(CX-aw-6)+'" y="'+(cy+5)+'" text-anchor="end" fill="#DC2626" font-size="11" font-weight="600" font-family="Inter">'+t.auto+'%</text>';
+  } else {
+    s+='<text x="'+(CX-8)+'" y="'+(cy+5)+'" text-anchor="end" fill="#DC2626" font-size="11" font-weight="700" font-family="Inter">0%</text>';
+  }
+
+  // Augmentation bar (right)
+  var gw=t.aug*pxPer;
+  s+='<rect x="'+CX+'" y="'+(cy-10)+'" width="'+gw+'" height="20" fill="#059669" opacity="0.75" rx="3" data-tip="Augmentation: '+t.aug+'%"/>';
+  s+='<text x="'+(CX+gw+6)+'" y="'+(cy+5)+'" fill="#059669" font-size="11" font-weight="600" font-family="Inter">'+t.aug+'%</text>';
+});
+
+// Separator
+var sepY=pT+tasks.length*RH+2;
+s+='<line x1="30" y1="'+sepY+'" x2="870" y2="'+sepY+'" stroke="#C8D8DB"/>';
+
+// Baseline row
+var bcy=sepY+14+RH/2;
+s+='<rect x="0" y="'+(bcy-RH/2)+'" width="'+W+'" height="'+RH+'" fill="#FFFBEB" opacity="0.4"/>';
+s+='<text x="'+(LBL-6)+'" y="'+(bcy+5)+'" text-anchor="end" fill="#0F1B1E" font-size="11" font-weight="500" font-family="Inter">'+baseline.name+'</text>';
+
+var baw=baseline.auto*pxPer;
+s+='<rect x="'+(CX-baw)+'" y="'+(bcy-10)+'" width="'+baw+'" height="20" fill="#DC2626" opacity="0.45" rx="3" data-tip="Automation: '+baseline.auto+'%"/>';
+s+='<text x="'+(CX-baw-6)+'" y="'+(bcy+5)+'" text-anchor="end" fill="#DC2626" font-size="11" font-weight="600" font-family="Inter">'+baseline.auto+'%</text>';
+var bgw=baseline.aug*pxPer;
+s+='<rect x="'+CX+'" y="'+(bcy-10)+'" width="'+bgw+'" height="20" fill="#059669" opacity="0.45" rx="3" data-tip="Augmentation: '+baseline.aug+'%"/>';
+s+='<text x="'+(CX+bgw+6)+'" y="'+(bcy+5)+'" fill="#059669" font-size="11" font-weight="600" font-family="Inter">'+baseline.aug+'%</text>';
+
+// Legend
+var ly=H-18;
+s+='<rect x="240" y="'+(ly-7)+'" width="14" height="14" fill="#DC2626" opacity="0.75" rx="3"/>';
+s+='<text x="260" y="'+(ly+4)+'" fill="#5C7A80" font-size="11" font-family="Inter">Automation (AI performs)</text>';
+s+='<rect x="440" y="'+(ly-7)+'" width="14" height="14" fill="#059669" opacity="0.75" rx="3"/>';
+s+='<text x="460" y="'+(ly+4)+'" fill="#5C7A80" font-size="11" font-family="Inter">Augmentation (AI assists)</text>';
+
+s+='</svg>';
+document.getElementById('svTP').innerHTML=s;
+}
 
 </script>
 </body>
