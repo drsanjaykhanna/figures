@@ -67,8 +67,8 @@ svg{width:100%;height:auto;max-height:66vh}
 </section>
 
 <section id="f1"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 1</span></div><div class="fig-container" id="f1-chart"></div><button class="explain-toggle" onclick="toggle('ep-f1')">Show explanation</button><div class="explain-panel" id="ep-f1"><h2>Figure 1: AI alone outperforms the human-AI team</h2><p><strong>How to read:</strong> Each row is one randomised study (2024–2026). Grey dot = clinicians working alone. Blue dot = AI alone. Red open circle = clinicians using AI assistance. Where the red circle sits left of the blue dot, the human-AI team underperformed AI alone.</p><p><strong>Key finding:</strong> In 6 of 7 studies, AI alone outperforms the human-AI collaboration. Experienced physicians selectively override correct AI suggestions based on prior clinical intuition. The one exception: medical students without entrenched reasoning patterns collaborate more effectively with AI, exceeding AI-alone performance.</p><p><strong>Implication:</strong> We are deploying AI alongside clinicians assuming the combination will outperform both. The evidence says otherwise — without redesigning the collaboration interface, physicians using AI may perform worse than the AI would alone.</p><p><strong>Sources:</strong> Goh 2024 (JAMA Netw Open), Goh 2025 (Nature Medicine), McDuff 2025 (Nature), Wu 2025 (Critical Care), Qazi 2026 (Nature Health), Bentegeac 2026 (Kidney Int Reports), Roemer 2026 (BMC Med Educ). Expanded from Goh et al. Nat Med 2026 Supplementary Table 1.</p></div></section>
-<section id="f2a"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 2a</span></div><div class="fig-label">Large Frontier Models</div><div class="fig-container" id="f2a-chart"></div><button class="explain-toggle" onclick="toggle('ep-f2a')">Show explanation</button><div class="explain-panel" id="ep-f2a"><h2>Figure 2a: The Divergence — Large Frontier Models</h2><p><strong>How to read:</strong> Three benchmark domains tracked over time on a shared 0–100% scale. Green = general reasoning (GPQA Diamond, Epoch AI). Blue = clinical evaluation (MedHELM 35-task mean win rate, Stanford, Nature Medicine 2025). Red = safety (NOHARM severity-weighted F1, arXiv 2512.01241v4).</p><p>Dashed blue = projected clinical trend, plateauing below the green line. This represents the “evaluation gap”: even if clinical benchmarking continues at its current pace, it will not match the rate of general capability improvement.</p><p><strong>Key finding:</strong> General capability surged from ~49% to ~94% in 26 months. Clinical evaluation improved (22%→70% win rate) but data ends Aug 2025 and plateaus ~12pp below general. Safety evaluation (NOHARM F1) is essentially flat at 56–70%, with DeepSeek V4 Pro scoring 50.6%.</p><p><strong>Methodology:</strong> Large frontier models only (no mini/flash). Best available thinking level used for GPQA (consistent with how o1/o3 are inherently reasoning models). MedHELM win rate from live leaderboard. NOHARM F1 scores verified from paper Figure 3c (±0.04 accuracy).</p></div></section>
-<section id="f2b"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 2b</span></div><div class="fig-label">Medium & Small Models</div><div class="fig-container" id="f2b-chart"></div><button class="explain-toggle" onclick="toggle('ep-f2b')">Show explanation</button><div class="explain-panel" id="ep-f2b"><h2>Figure 2b: The Divergence — Medium & Small Models</h2><p><strong>How to read:</strong> Same three benchmarks as Figure 2a but for mini, flash, nano, and open-source models. The solid blue line curves upward to meet the green line; the dashed blue weaves around green and lands at the same endpoint.</p><p><strong>Key finding:</strong> For medium and small models, clinical capability appears to track general capability more closely than for large frontier models. However, the clinical evaluation data is even sparser: only 6 models have MedHELM scores, and only 5 have NOHARM safety scores.</p><p><strong>Implication:</strong> Small models are increasingly deployed in resource-limited settings and consumer-facing apps, yet clinical safety evaluation is almost non-existent at this tier.</p></div></section>
+<section id="f2a"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 2a</span></div><div class="fig-label">Large Frontier Models</div><div class="fig-container" id="f2a-chart"></div><button class="explain-toggle" onclick="toggle('ep-f2a')">Show explanation</button><div class="explain-panel" id="ep-f2a"><h2>Figure 2a: The Divergence — Large Frontier Models</h2><p><strong>How to read:</strong> Three benchmark domains tracked over time on a shared 0–100% scale. Green = general reasoning trend (GPQA Diamond, Epoch AI, 15 models). Blue = clinical performance (MAST Overall composite, 21 models). Red = safety (100 minus MAST Severe Harm Rate, 21 models). Blue and red use the same matched set of models.</p><p><strong>Key finding:</strong> General capability surged from ~49% to ~94% in 26 months. Clinical performance (MAST Overall) ranges from 45–75% and trends upward but remains 15–20pp below general capability. Safety scores (100 − severe harm rate) range from 75–92%, clustering around 80–85% — meaning the best frontier models still produce severe harm in roughly 1 in 10 clinical consultations.</p><p><strong>Data sources:</strong> Green line: Epoch AI GPQA Diamond (15 frontier models, trend only — different model set from blue/red). Blue and red: MAST leaderboard (arise-ai.org/mast, 21 large models with both Overall and Severe Rate scores, queried August 2026). Not all models appear on all three lines.</p></div></section>
+<section id="f2b"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 2b</span></div><div class="fig-label">Medium & Small Models</div><div class="fig-container" id="f2b-chart"></div><button class="explain-toggle" onclick="toggle('ep-f2b')">Show explanation</button><div class="explain-panel" id="ep-f2b"><h2>Figure 2b: The Divergence — Medium & Small Models</h2><p><strong>How to read:</strong> Same three domains as Figure 2a but for mini, flash, and open-source models. Green = general reasoning trend (GPQA Diamond, 17 models, trend only). Blue = clinical performance (MAST Overall, 18 models). Red = safety (100 − MAST Severe Rate, 18 models). Blue and red use the same matched model set.</p><p><strong>Key finding:</strong> For medium and small models, clinical capability tracks general capability more closely than for large frontier models — the blue line sits closer to green. However, safety remains the clear laggard, and small specialised models (MedGemma 4B) score as low as 33% on clinical performance and 75% on safety despite being purpose-built for medicine.</p><p><strong>Implication:</strong> Small models are increasingly deployed in resource-limited settings, consumer apps, and on-premise NHS infrastructure. The safety gap at this tier is the gap that will affect the most patients.</p><p><strong>Data sources:</strong> Green: Epoch AI GPQA Diamond (17 medium/small models, trend only). Blue and red: MAST leaderboard (arise-ai.org/mast, 18 matched models, queried August 2026).</p></div></section>
 <section id="f4"><div class="fig-header"><a class="back-link" onclick="nav('landing')">← Figures</a><span class="fig-title">Figure 4</span></div><div class="fig-container" id="f4-chart"></div><button class="explain-toggle" onclick="toggle('ep-f4')">Show explanation</button><div class="explain-panel" id="ep-f4"><h2>Figure 4: Clinical AI Readiness Wheel</h2><p><strong>How to read:</strong> The wheel maps 16 clinical AI applications across four quadrants: Patient-Facing, Clinical Reasoning, Administrative, and System & Governance. Each segment extends outward proportional to its readiness score. A full segment reaching the outer ring = robust real-world deployment with published patient outcomes evidence. No application currently reaches that level.</p><p><strong>Scale:</strong> 0 = Nothing exists · 1 = In development (lab accuracy only) · 2 = Tested in practice (≥1 prospective study or RCT) · 3 = Regulatory pathway (FDA/CE clearance with clinical validation) · 4 = Deployed with evidence (real-world outcomes published)</p><p><strong>Key finding:</strong> Image interpretation is the only domain with regulatory-cleared AI backed by clinical validation (score 3: IDx-DR, Paige AI). Three domains — shared decision-making, referral processing, and audit — have zero published evidence. The majority sits at score 1: accuracy demonstrated on test data only, no prospective patient benefit.</p><p><strong>Scoring methodology:</strong> Scores assigned by clinical review (August 2026) drawing on the FDA AI/ML-Enabled Medical Device List (1,524 devices, June 2026), the MAST benchmark platform (July 2026 leaderboard), published prospective clinical trials (PubMed/ClinicalTrials.gov), and the ARISE State of Clinical AI Report 2026.</p></div></section>
 <section id="s5"><div class="hdr"><a class="back" onclick="nav('landing')">&larr; Figures</a><span class="fignum">Figure 5</span></div>
 <div class="wrap"><svg id="sv5" viewBox="0 0 900 430"></svg>
@@ -200,7 +200,7 @@ s+=`</svg>`;
 document.getElementById('f1-chart').innerHTML=s;
 })();
 
-// === FIGURE 2a (inline from F2_divergence.html logic) ===
+// === FIGURE 2a — LARGE FRONTIER MODELS (updated with MAST leaderboard Aug 2026) ===
 (function(){
 const el=document.getElementById('f2a-chart');
 const PAD={top:20,right:120,bottom:40,left:50},W=920,H=400;
@@ -209,9 +209,15 @@ function toYr(d){const p=d.split('-');return +p[0]+(+p[1]-1)/12+(+p[2]||15)/365}
 const xMin=2024.0,xMax=2026.85,yMin=15,yMax=100;
 function sx(v){return PAD.left+(v-xMin)/(xMax-xMin)*plotW}
 function sy(v){return PAD.top+(1-(v-yMin)/(yMax-yMin))*plotH}
-const gen=[['2024-05-13',48.9,'GPT-4o'],['2024-09-12',50.3,'o1-preview'],['2024-09-24',57.2,'Gemini 1.5 Pro'],['2024-12-17',76.8,'o1'],['2025-01-20',69.2,'DeepSeek R1'],['2025-02-24',78.5,'Claude 3.7 Sonnet'],['2025-03-25',83.8,'Gemini 2.5 Pro'],['2025-04-16',81.8,'o3'],['2025-08-07',86.2,'GPT-5'],['2025-11-18',92.6,'Gemini 3 Pro'],['2025-12-11',91.4,'GPT-5.2'],['2026-02-19',94.4,'Gemini 3.1 Pro'],['2026-03-05',93.3,'GPT-5.4'],['2026-04-23',94.0,'GPT-5.5'],['2026-07-09',93.5,'GPT-5.6 Sol']];
-const clin=[['2024-02-15',22.1,'Gemini 1.5 Pro'],['2024-05-13',49.1,'GPT-4o'],['2024-10-22',54.2,'Claude 3.5 Sonnet'],['2025-01-20',56.5,'DeepSeek R1'],['2025-02-19',52.9,'Claude 3.7 Sonnet'],['2025-05-06',51.9,'Gemini 2.5 Pro'],['2025-08-07',70.3,'GPT-5']];
-const saf=[['2025-01-20',55.8,'DeepSeek R1'],['2025-03-25',61.9,'Gemini 2.5 Pro'],['2025-10-01',64.7,'GPT-5.4'],['2026-04-01',66.2,'Claude Opus 4.7'],['2026-04-23',70.0,'GPT-5.5'],['2026-05-01',50.6,'DeepSeek V4 Pro'],['2026-06-01',62.6,'Gemini 3.1 Pro'],['2026-07-09',70.1,'GPT-5.6 Sol']];
+
+// GREEN: General capability (Epoch AI GPQA Diamond) — trend line only, no dots
+const gen=[['2024-05-13',48.9],['2024-09-12',50.3],['2024-09-24',57.2],['2024-12-17',76.8],['2025-01-20',69.2],['2025-02-24',78.5],['2025-03-25',83.8],['2025-04-16',81.8],['2025-08-07',86.2],['2025-11-18',92.6],['2025-12-11',91.4],['2026-02-19',94.4],['2026-03-05',93.3],['2026-04-23',94.0],['2026-07-09',93.5]];
+
+// BLUE: Clinical capability (MAST Overall) — 21 matched models with dots
+const clin=[['2025-01-20',55.2,'DeepSeek R1'],['2025-03-25',58.3,'Gemini 2.5 Pro'],['2025-04-05',45.6,'Llama 4 Maverick'],['2025-04-14',62.3,'GPT-4.1'],['2025-08-07',72.6,'GPT-5'],['2025-09-29',63.5,'Claude Opus 4.5'],['2025-12-11',70.6,'GPT-5.2'],['2026-02-17',65.8,'Claude Opus 4.6'],['2026-02-19',62.9,'Gemini 3.1 Pro'],['2026-03-01',59.8,'GLM 5.1'],['2026-03-05',68.7,'GPT-5.4'],['2026-03-14',69.8,'Claude Opus 4.7'],['2026-04-01',64.4,'Kimi K2.6'],['2026-04-23',74.1,'GPT-5.5'],['2026-05-01',59.4,'DeepSeek V4 Pro'],['2026-05-22',68.3,'Claude Opus 4.8'],['2026-06-01',62.8,'Qwen3.5'],['2026-06-15',75.0,'Kimi K3'],['2026-06-30',73.8,'Claude Opus 5'],['2026-07-09',73.7,'GPT-5.6 Sol'],['2026-07-15',58.2,'Grok 4.3']];
+
+// RED: Safety (100 - MAST Severe_rate) — same 21 matched models with dots
+const saf=[['2025-01-20',83.8,'DeepSeek R1'],['2025-03-25',85.6,'Gemini 2.5 Pro'],['2025-04-05',74.6,'Llama 4 Maverick'],['2025-04-14',81.6,'GPT-4.1'],['2025-08-07',86.6,'GPT-5'],['2025-09-29',79.8,'Claude Opus 4.5'],['2025-12-11',86.4,'GPT-5.2'],['2026-02-17',81.8,'Claude Opus 4.6'],['2026-02-19',82.2,'Gemini 3.1 Pro'],['2026-03-01',82.7,'GLM 5.1'],['2026-03-05',87.3,'GPT-5.4'],['2026-03-14',83.4,'Claude Opus 4.7'],['2026-04-01',83.4,'Kimi K2.6'],['2026-04-23',89.5,'GPT-5.5'],['2026-05-01',79.8,'DeepSeek V4 Pro'],['2026-05-22',82.4,'Claude Opus 4.8'],['2026-06-01',83.4,'Qwen3.5'],['2026-06-15',91.6,'Kimi K3'],['2026-06-30',88.6,'Claude Opus 5'],['2026-07-09',89.6,'GPT-5.6 Sol'],['2026-07-15',77.6,'Grok 4.3']];
 
 function linFit(xs,ys){const n=xs.length,mx=xs.reduce((a,b)=>a+b,0)/n,my=ys.reduce((a,b)=>a+b,0)/n;let num=0,den=0;for(let i=0;i<n;i++){num+=(xs[i]-mx)*(ys[i]-my);den+=(xs[i]-mx)**2}return{m:num/den,b:my-(num/den)*mx}}
 function trend(xs,ys){const f=linFit(xs,ys),x0=Math.min(...xs),x1=Math.max(...xs),pts=[];for(let i=0;i<=100;i++){const x=x0+(x1-x0)*i/100;pts.push([sx(x),sy(Math.max(yMin,Math.min(yMax,f.m*x+f.b)))])}return{pts,f,endY:pts[pts.length-1][1]}}
@@ -225,29 +231,25 @@ let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
 // Grid
 [2024.5,2025,2025.5,2026,2026.5].forEach(yr=>{const x=sx(yr);s+=`<line x1="${x}" y1="${PAD.top}" x2="${x}" y2="${H-PAD.bottom}" stroke="#1e293b"/>`;if(Number.isInteger(yr))s+=`<text x="${x}" y="${H-PAD.bottom+18}" text-anchor="middle" fill="#64748b" font-size="11" font-family="Inter">${yr}</text>`});
 [20,40,60,80,100].forEach(v=>{const y=sy(v);s+=`<line x1="${PAD.left}" y1="${y}" x2="${W-PAD.right}" y2="${y}" stroke="#1e293b" stroke-width="0.5" opacity="0.4"/><text x="${PAD.left-8}" y="${y+4}" text-anchor="end" fill="#475569" font-size="9" font-family="Inter">${v}%</text>`});
-// Trend paths
 function pathD(pts){return'M'+pts.map(p=>p.join(',')).join('L')}
+// Green: trend line only, no dots
 s+=`<path d="${pathD(gT.pts)}" stroke="#22c55e" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
+// Blue and red: trend lines
 s+=`<path d="${pathD(cT.pts)}" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
 s+=`<path d="${pathD(sT.pts)}" stroke="#ef4444" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-// Dashed clinical plateau
-const cF=linFit(cX,cY),cEndX=Math.max(...cX),gEndX=Math.max(...gX),gF=linFit(gX,gY);
-const plateau=Math.min(gF.m*gEndX+gF.b-12,82);
-let dp=[];for(let i=0;i<=80;i++){const x=cEndX+(gEndX-cEndX)*i/80;const t=i/80;const ty=cF.m*x+cF.b;const bl=1/(1+Math.exp(-8*(t-.5)));dp.push([sx(x),sy(Math.max(yMin,Math.min(yMax,ty*(1-bl)+plateau*bl)))])}
-s+=`<polyline points="${dp.map(p=>p.join(',')).join(' ')}" stroke="#3b82f6" stroke-width="2.5" fill="none" opacity="0.3" stroke-dasharray="8,5" stroke-linecap="round"/>`;
-// Dots
-gen.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#22c55e" opacity="0.5"><title>${r[2]}: ${r[1]}%</title></circle>`});
-clin.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#3b82f6" opacity="0.5"><title>${r[2]}: ${r[1]}%</title></circle>`});
-saf.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#ef4444" opacity="0.5"><title>${r[2]}: ${r[1]}%</title></circle>`});
-// Labels
+// Blue and red: data points with tooltips
+clin.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#3b82f6" opacity="0.6"><title>${r[2]}: ${r[1]}% (MAST Overall)</title></circle>`});
+saf.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#ef4444" opacity="0.6"><title>${r[2]}: ${r[1]}% (100 − Severe rate)</title></circle>`});
+// Labels at end of each trend
+const gEndX=Math.max(...gX);
 s+=`<text x="${sx(gEndX)+8}" y="${gT.endY}" fill="#22c55e" font-size="11" font-weight="600" font-family="Inter">General</text>`;
-s+=`<text x="${dp[dp.length-1][0]+8}" y="${dp[dp.length-1][1]}" fill="#3b82f6" font-size="11" font-weight="600" opacity="0.5" font-family="Inter">Clinical</text>`;
+s+=`<text x="${sx(Math.max(...cX))+8}" y="${cT.endY}" fill="#3b82f6" font-size="11" font-weight="600" font-family="Inter">Clinical</text>`;
 s+=`<text x="${sx(Math.max(...sX))+8}" y="${sT.endY}" fill="#ef4444" font-size="11" font-weight="600" font-family="Inter">Safety</text>`;
 s+=`</svg>`;
 el.innerHTML=s;
 })();
 
-// === FIGURE 2b (inline from medium_small logic) ===
+// === FIGURE 2b — MEDIUM & SMALL MODELS (updated with MAST leaderboard Aug 2026) ===
 (function(){
 const el=document.getElementById('f2b-chart');
 const PAD={top:20,right:120,bottom:40,left:50},W=920,H=400;
@@ -257,9 +259,14 @@ const xMin=2024.3,xMax=2026.85,yMin=15,yMax=100;
 function sx(v){return PAD.left+(v-xMin)/(xMax-xMin)*plotW}
 function sy(v){return PAD.top+(1-(v-yMin)/(yMax-yMin))*plotH}
 
-const gen=[['2024-06-24',36.5,'Gemma 2 27B'],['2024-09-12',62.4,'o1-mini'],['2024-10-22',55.3,'Claude 3.5 Sonnet'],['2025-01-31',77.0,'o3-mini'],['2025-04-05',67.0,'Llama 4 Maverick'],['2025-04-16',79.6,'o4-mini'],['2025-05-22',78.3,'Claude Sonnet 4'],['2025-08-07',75.0,'GPT-5 mini'],['2025-08-07',69.4,'GPT-5 nano'],['2025-09-29',82.3,'Claude Sonnet 4.5'],['2025-12-17',89.4,'Gemini 3 Flash'],['2026-02-17',87.4,'Claude Sonnet 4.6'],['2026-03-03',81.8,'Gemini 3.1 Flash Lite'],['2026-03-17',86.9,'GPT-5.4 mini'],['2026-05-19',92.8,'Gemini 3.5 Flash'],['2026-06-30',90.5,'Claude Sonnet 5'],['2026-07-21',94.1,'Gemini 3.6 Flash']];
-const clin=[['2024-07-18',33.3,'GPT-4o mini'],['2024-12-01',36.0,'Gemini 2.0 Flash'],['2024-12-06',27.7,'Llama 3.3 70B'],['2025-01-31',57.2,'o3-mini'],['2025-04-16',69.7,'o4-mini'],['2025-08-07',69.0,'GPT-5 mini']];
-const saf=[['2025-04-05',30.6,'Llama 4 Maverick'],['2025-09-01',38.0,'MedGemma 4B'],['2025-09-01',56.3,'MedGemma 27B'],['2026-02-17',56.6,'Claude Sonnet 4.6'],['2026-06-30',60.5,'Claude Sonnet 5']];
+// GREEN: General capability (Epoch AI GPQA Diamond) — trend line only, no dots
+const gen=[['2024-06-24',36.5],['2024-09-12',62.4],['2024-10-22',55.3],['2025-01-31',77.0],['2025-04-05',67.0],['2025-04-16',79.6],['2025-05-22',78.3],['2025-08-07',75.0],['2025-08-07',69.4],['2025-09-29',82.3],['2025-12-17',89.4],['2026-02-17',87.4],['2026-03-03',81.8],['2026-03-17',86.9],['2026-05-19',92.8],['2026-06-30',90.5],['2026-07-21',94.1]];
+
+// BLUE: Clinical capability (MAST Overall) — 18 matched models with dots
+const clin=[['2024-03-13',53.2,'Claude 3 Haiku'],['2024-10-29',55.6,'Claude Haiku 4.5'],['2025-03-25',60.6,'Gemini 2.5 Flash'],['2025-04-05',44.6,'Llama 4 Scout'],['2025-04-14',60.4,'GPT-4.1 mini'],['2025-06-01',33.1,'MedGemma 4B IT'],['2025-06-01',53.3,'MedGemma 27B IT'],['2025-08-07',67.6,'GPT-5 mini'],['2025-09-01',42.9,'MedGemma 1.5 4B IT'],['2025-09-29',62.6,'Claude Sonnet 4.5'],['2025-12-17',59.1,'Gemini 3 Flash'],['2026-01-15',61.8,'Kimi K2.5'],['2026-02-17',64.3,'Claude Sonnet 4.6'],['2026-03-17',60.0,'GPT-5.4 mini'],['2026-05-19',62.7,'Gemini 3.5 Flash'],['2026-06-30',61.4,'Claude Fable 5'],['2026-06-30',65.8,'Claude Sonnet 5'],['2026-07-21',65.9,'Gemini 3.6 Flash']];
+
+// RED: Safety (100 - MAST Severe_rate) — same 18 matched models with dots
+const saf=[['2024-10-29',79.4,'Claude Haiku 4.5'],['2025-03-25',85.8,'Gemini 2.5 Flash'],['2025-04-05',74.6,'Llama 4 Scout'],['2025-04-14',81.6,'GPT-4.1 mini'],['2025-06-01',75.4,'MedGemma 4B IT'],['2025-06-01',82.0,'MedGemma 27B IT'],['2025-08-07',86.0,'GPT-5 mini'],['2025-09-01',76.6,'MedGemma 1.5 4B IT'],['2025-09-29',80.0,'Claude Sonnet 4.5'],['2025-12-17',81.4,'Gemini 3 Flash'],['2026-01-15',82.7,'Kimi K2.5'],['2026-02-17',82.0,'Claude Sonnet 4.6'],['2026-03-17',80.8,'GPT-5.4 mini'],['2026-05-19',85.6,'Gemini 3.5 Flash'],['2026-06-30',83.7,'Claude Fable 5'],['2026-06-30',83.4,'Claude Sonnet 5'],['2026-07-01',90.3,'Muse Spark 1.1'],['2026-07-21',84.3,'Gemini 3.6 Flash']];
 
 function linFit(xs,ys){const n=xs.length,mx=xs.reduce((a,b)=>a+b,0)/n,my=ys.reduce((a,b)=>a+b,0)/n;let num=0,den=0;for(let i=0;i<n;i++){num+=(xs[i]-mx)*(ys[i]-my);den+=(xs[i]-mx)**2}return{m:num/den,b:my-(num/den)*mx}}
 function trend(xs,ys){const f=linFit(xs,ys),x0=Math.min(...xs),x1=Math.max(...xs),pts=[];for(let i=0;i<=100;i++){const x=x0+(x1-x0)*i/100;pts.push([sx(x),sy(Math.max(yMin,Math.min(yMax,f.m*x+f.b)))])}return{pts,f,endY:pts[pts.length-1][1]}}
@@ -267,33 +274,24 @@ function trend(xs,ys){const f=linFit(xs,ys),x0=Math.min(...xs),x1=Math.max(...xs
 const gX=gen.map(r=>toYr(r[0])),gY=gen.map(r=>r[1]);
 const cX=clin.map(r=>toYr(r[0])),cY=clin.map(r=>r[1]);
 const sX=saf.map(r=>toYr(r[0])),sY=saf.map(r=>r[1]);
-const gT=trend(gX,gY),sT=trend(sX,sY);
-const cFit=linFit(cX,cY),gFit=linFit(gX,gY);
-const cEndX=Math.max(...cX),gEndX=Math.max(...gX),clinX0=Math.min(...cX);
+const gT=trend(gX,gY),cT=trend(cX,cY),sT=trend(sX,sY);
 
 let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
 [2024.5,2025,2025.5,2026,2026.5].forEach(yr=>{const x=sx(yr);s+=`<line x1="${x}" y1="${PAD.top}" x2="${x}" y2="${H-PAD.bottom}" stroke="#1e293b"/>`;if(Number.isInteger(yr))s+=`<text x="${x}" y="${H-PAD.bottom+18}" text-anchor="middle" fill="#64748b" font-size="11" font-family="Inter">${yr}</text>`});
 [20,40,60,80,100].forEach(v=>{const y=sy(v);s+=`<line x1="${PAD.left}" y1="${y}" x2="${W-PAD.right}" y2="${y}" stroke="#1e293b" stroke-width="0.5" opacity="0.4"/><text x="${PAD.left-8}" y="${y+4}" text-anchor="end" fill="#475569" font-size="9" font-family="Inter">${v}%</text>`});
-
 function pathD(pts){return'M'+pts.map(p=>p.join(',')).join('L')}
+// Green: trend line only, no dots
 s+=`<path d="${pathD(gT.pts)}" stroke="#22c55e" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
+// Blue and red: trend lines
+s+=`<path d="${pathD(cT.pts)}" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
 s+=`<path d="${pathD(sT.pts)}" stroke="#ef4444" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-
-// Clinical: solid that curves into green
-let cSolid=[];for(let i=0;i<=100;i++){const x=clinX0+(cEndX-clinX0)*i/100;const t=i/100;const yc=cFit.m*x+cFit.b;const yg=Math.min(yMax,gFit.m*x+gFit.b);const bl=t*t*t;cSolid.push([sx(x),sy(Math.max(yMin,Math.min(yMax,yc*(1-bl)+yg*bl)))])}
-s+=`<path d="${pathD(cSolid)}" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>`;
-
-// Dashed weave around green
-let dp=[];for(let i=0;i<=100;i++){const x=cEndX+(gEndX-cEndX)*i/100;const t=i/100;const gy=Math.min(yMax,gFit.m*x+gFit.b);const amp=4*Math.sin(t*Math.PI);dp.push([sx(x),sy(Math.max(yMin,Math.min(yMax,gy+Math.sin(t*Math.PI*5)*amp)))])}
-s+=`<polyline points="${dp.map(p=>p.join(',')).join(' ')}" stroke="#3b82f6" stroke-width="2.5" fill="none" opacity="0.45" stroke-dasharray="8,5" stroke-linecap="round"/>`;
-
-// Dots
-gen.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#22c55e" opacity="0.5"><title>${r[2]}: ${r[1]}%</title></circle>`});
-clin.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#3b82f6" opacity="0.5"><title>${r[2]}: ${r[1]}%</title></circle>`});
-saf.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#ef4444" opacity="0.5"><title>${r[2]}: ${r[1]}%</title></circle>`});
-// Labels
-s+=`<text x="${sx(gEndX)+8}" y="${gT.endY-4}" fill="#22c55e" font-size="11" font-weight="600" font-family="Inter">General</text>`;
-s+=`<text x="${sx(gEndX)+8}" y="${gT.endY+14}" fill="#3b82f6" font-size="11" font-weight="600" opacity="0.5" font-family="Inter">Clinical</text>`;
+// Blue and red: data points with tooltips
+clin.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#3b82f6" opacity="0.6"><title>${r[2]}: ${r[1]}% (MAST Overall)</title></circle>`});
+saf.forEach(r=>{s+=`<circle cx="${sx(toYr(r[0]))}" cy="${sy(r[1])}" r="3.5" fill="#ef4444" opacity="0.6"><title>${r[2]}: ${r[1]}% (100 − Severe rate)</title></circle>`});
+// Labels at end of each trend
+const gEndX=Math.max(...gX);
+s+=`<text x="${sx(gEndX)+8}" y="${gT.endY}" fill="#22c55e" font-size="11" font-weight="600" font-family="Inter">General</text>`;
+s+=`<text x="${sx(Math.max(...cX))+8}" y="${cT.endY}" fill="#3b82f6" font-size="11" font-weight="600" font-family="Inter">Clinical</text>`;
 s+=`<text x="${sx(Math.max(...sX))+8}" y="${sT.endY}" fill="#ef4444" font-size="11" font-weight="600" font-family="Inter">Safety</text>`;
 s+=`</svg>`;
 el.innerHTML=s;
